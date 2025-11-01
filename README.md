@@ -34,9 +34,6 @@ npm install -g pnpm
 pnpm -v
 ```
 
-4. **PostgreSQL**  
-   Make sure PostgreSQL is running locally and you have credentials to create a database.
-
 ---
 
 ## 📥 Installation
