@@ -1,4 +1,5 @@
 using Backend.Data;
+using Backend.Endpoints;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,6 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/judete", async (AppDbContext db) =>
-    await db.Judete.ToListAsync());
+app.MapJudeteEndpoints();
 
 app.Run();
