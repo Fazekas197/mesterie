@@ -11,4 +11,5 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Judet> Judete { get; set; } = null!;
+    public DbSet<Specializare> Specializari { get; set; } = null!;
 }
