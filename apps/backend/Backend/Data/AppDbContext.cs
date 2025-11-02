@@ -16,6 +16,7 @@ public class AppDbContext : DbContext
     public DbSet<Meserias> Meseriasi { get; set; } = null!;
     public DbSet<SpecializareMeserias> SpecializariMeseriasi { get; set; } = null!;
     public DbSet<Favorit> Favorite { get; set; } = null!;
+    public DbSet<Oferta> Oferte { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
