@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Utilizator> Utilizatori { get; set; } = null!;
     public DbSet<Meserias> Meseriasi { get; set; } = null!;
     public DbSet<SpecializareMeserias> SpecializariMeseriasi { get; set; } = null!;
+    public DbSet<Favorit> Favorite { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -44,5 +45,24 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(s => s.Id_specializare)
             .OnDelete(DeleteBehavior.Restrict);
+        // -------------------------------
+        // Favorit
+        // -------------------------------
+        modelBuilder.Entity<Favorit>()
+            .HasKey(f => f.Id);
+
+        modelBuilder.Entity<Favorit>()
+            .HasOne(f => f.Utilizator)
+            .WithMany() // optionally: .WithMany(u => u.Favoriti)
+            .HasForeignKey(f => f.Id_user)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Favorit>()
+            .HasOne(f => f.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Favoriti)
+            .HasForeignKey(f => f.Id_meserias)
+            .HasPrincipalKey(m => m.Id) // FK points to alternate key
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }
