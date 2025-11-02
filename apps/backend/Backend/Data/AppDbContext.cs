@@ -14,7 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<Specializare> Specializari { get; set; } = null!;
     public DbSet<Utilizator> Utilizatori { get; set; } = null!;
     public DbSet<Meserias> Meseriasi  { get; set; } = null!;
-
+    public DbSet<SpecializareMeserias> SpecizalizariMeseriasi { get; set; } = null!;
 
 
 
