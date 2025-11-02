@@ -8,7 +8,7 @@ namespace Backend.Models;
 [PrimaryKey(nameof(Id), nameof(Id_user))]
 public class Meserias
 {   
-    [Required]
+    [Required] 
     public int Id{ get; set; } 
     [Required] [ForeignKey("Utilizator")]
     public int Id_user {get; set;}
