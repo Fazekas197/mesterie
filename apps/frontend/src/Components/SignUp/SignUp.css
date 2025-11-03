@@ -5,7 +5,7 @@
     justify-content: center; /* Centrează conținutul (logo + formular) pe orizontală */
     align-items: center;    /* Centrează conținutul (logo + formular) pe verticală */
     height: 100vh;
-    gap: 80px;
+    gap: 40px;
     padding: 20px 80px; 
     background: linear-gradient(to bottom, #001f6b, #007bff);
     box-sizing: border-box;
@@ -29,7 +29,7 @@
 }
 .logo img {
     /* ✨ Ajustare dimensiune pentru a se potrivi cu imaginea de design */
-    max-height: 250px; 
+    max-height: 460px; 
     width: auto;
     object-fit: contain;
 }
@@ -39,8 +39,8 @@
     background: #EFEFF0;
     width: 100%;
     /* Lățimea containerului din design pare să fie în jur de 400px */
-    max-width: 400px; 
-    min-height: 500px;
+    max-width: 450px; 
+    min-height: 550px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -122,12 +122,14 @@
     font-weight: 500;
     width: 100%;
     text-align: center; /* Centrare pentru textul "Continuați în alt mod" */
+    color: #333;
 }
 .DejaCont {
     margin-top: 10px;
     width: 100%;
     /* ✨ SCHIMBARE: Centrare pentru textul "Aveți deja un cont?" */
     text-align: center; 
+    color:#333;
 }
 .DejaCont a {
     color: #007bff;
