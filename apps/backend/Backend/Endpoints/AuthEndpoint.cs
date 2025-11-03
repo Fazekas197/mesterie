@@ -25,15 +25,24 @@ public static class AuthEndpoints
                 Data_Nasterii = user.Data_Nasterii,
                 Parola_Hash = BCrypt.Net.BCrypt.HashPassword(user.Parola)
             };
-            if (user.EsteMeserias == true)
-            {
-                string? Desc,
-                int? Experienta,
-                float? Pret_start,
-                string? Disponibilitate
-            }
+
             await db.Utilizatori.AddAsync(createdUser);
             await db.SaveChangesAsync();
+            if (user.EsteMeserias == true)
+            {
+                var createdMeserias = new Meserias
+                {
+                    Desc = user.Desc,
+                    Experienta = user.Experienta,
+                    Pret_start = user.Pret_start,
+                    Disponibilitate = user.Disponibilitate,
+                    Id_user = createdUser.Id,
+                    Id_Judet = user.Id_Judet,
+                };
+                await db.Meseriasi.AddAsync(createdMeserias);
+                await db.SaveChangesAsync();
+            }
+
         });
     }
 }

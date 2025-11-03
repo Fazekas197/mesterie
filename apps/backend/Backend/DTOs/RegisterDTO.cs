@@ -9,10 +9,10 @@ public record RegisterDTO(
     DateOnly Data_Nasterii,
 
 
-    string? Desc,
-    int? Experienta,
-    float? Pret_start,
-    string? Disponibilitate,
+    string Desc,
+    int Experienta,
+    float Pret_start,
+    string Disponibilitate,
     int Id_User,
     int Id_Judet
 );
