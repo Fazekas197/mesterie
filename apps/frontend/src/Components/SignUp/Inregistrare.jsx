@@ -55,12 +55,32 @@ const Inregistrare = ({onNavigare}) =>{
                             className="text-input date-input" 
                         />
                     </div>
+                    <div className="input-field-group">
+                        <label htmlFor="phone" className="input-label">Phone Number</label>
+    
+                            <div className="phone-input-wrapper">
+                            <div className="country-selector">
+                            {/* 🇷🇴 Drapelul României ca emoji sau simbol custom */}
+                            <span role="img" aria-label="Romania flag">🇷🇴</span> 
+                             <span>+40</span>
+                            {/* Săgeata în jos */}
+                            <span>&#9662;</span>
+                        </div>
+        
+                        <input 
+                                type="tel" 
+                                id="phone"
+                                className="phone-input-field"
+                                placeholder="000-000-000"
+                            />
+                        </div>
+                    </div>
                     
                    
                     
                 </div>
 
-                    </div>          
+            </div>          
         </div>
     );
 }
