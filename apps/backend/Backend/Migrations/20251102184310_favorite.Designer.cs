@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251102184310_favorite")]
+    partial class favorite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,48 +97,6 @@ namespace Backend.Migrations
                     b.HasIndex("Id_user");
 
                     b.ToTable("Meseriasi");
-                });
-
-            modelBuilder.Entity("Backend.Models.Oferta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<float>("Buget")
-                        .HasColumnType("real");
-
-                    b.Property<DateOnly>("Created_at")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Id_judet")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_specializare")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_user")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Titlu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_judet");
-
-                    b.HasIndex("Id_specializare");
-
-                    b.HasIndex("Id_user");
-
-                    b.ToTable("Oferte");
                 });
 
             modelBuilder.Entity("Backend.Models.Specializare", b =>
@@ -244,33 +205,6 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Judet");
-
-                    b.Navigation("Utilizator");
-                });
-
-            modelBuilder.Entity("Backend.Models.Oferta", b =>
-                {
-                    b.HasOne("Backend.Models.Judet", "Judet")
-                        .WithMany()
-                        .HasForeignKey("Id_judet")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Specializare", "Specializare")
-                        .WithMany()
-                        .HasForeignKey("Id_specializare")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Utilizator", "Utilizator")
-                        .WithMany()
-                        .HasForeignKey("Id_user")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Judet");
-
-                    b.Navigation("Specializare");
 
                     b.Navigation("Utilizator");
                 });
