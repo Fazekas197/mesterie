@@ -18,7 +18,7 @@ public class Utilizator
     [MinLength(8)]
     public string Parola_Hash { get; set; } = null!;
     [Required]
-    public string Rol { get; set; } = null!;
+    public bool EsteMeserias { get; set; } = false;
     [Required]
     public string Telefon { get; set; } = null!;
     [Required]

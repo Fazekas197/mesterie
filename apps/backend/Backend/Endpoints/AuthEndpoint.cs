@@ -2,6 +2,7 @@ using Backend.Data;
 using Backend.DTOs;
 using Backend.Models;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Endpoints;
@@ -20,12 +21,12 @@ public static class AuthEndpoints
                 Nume = user.Nume,
                 Email = user.Email,
                 Telefon = user.Telefon,
-                Rol = user.Rol,
+                EsteMeserias = user.EsteMeserias,
                 Data_Nasterii = user.Data_Nasterii,
                 Parola_Hash = BCrypt.Net.BCrypt.HashPassword(user.Parola)
             };
-
-            await db.Utilizatori.AddAsync(createdUser);
+            if (user.EsteMeserias == true)
+                await db.Utilizatori.AddAsync(createdUser);
             await db.SaveChangesAsync();
         });
     }

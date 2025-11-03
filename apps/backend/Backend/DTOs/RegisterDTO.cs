@@ -4,7 +4,7 @@ public record RegisterDTO(
     string Nume,
     string Email,
     string Parola,
-    string Rol,
+    bool EsteMeserias,
     string Telefon,
     DateOnly Data_Nasterii,
 
