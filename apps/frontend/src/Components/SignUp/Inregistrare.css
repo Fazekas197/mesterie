@@ -85,15 +85,16 @@
     display: flex;
     align-items: center;
     width: 100%;
-    
     padding: 15px 20px; /* Padding interior */
     border: 1px solid #ccc;
     background-color: #f0f0f0;
     border-radius: 8px;
     box-sizing: border-box; 
-    
-    /* Asigură-te că cursorul este de tip text pentru întregul wrapper */
     cursor: text; 
+}
+.phone-input-wrapper:focus-within {
+    border-color: #007bff; 
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
 }
 .country-selector {
     display: flex;
