@@ -47,8 +47,16 @@ const Inregistrare = ({onNavigare}) =>{
                             placeholder="numeprenume@gmail.com"
                         />
                     </div>
+                    <div className="input-field-group">
+                        <label htmlFor="dataNastere" className="input-label">Data nașterii</label>
+                        <input 
+                            type="date" 
+                            id="dataNastere"
+                            className="text-input date-input" 
+                        />
+                    </div>
                     
-                    {/* Aici vor urma butonul sau pașii următori */}
+                   
                     
                 </div>
 

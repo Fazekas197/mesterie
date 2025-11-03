@@ -1,28 +1,6 @@
 /* Stiluri pentru așezarea generală (presupunând că .page-wrapper și .container sunt deja stilizate) */
 
-/* Stilul containerului: așezarea elementelor pe verticală, aliniate la stânga */
-.container {
-    /* Proprietățile preluate din solicitare */
-    background: #EFEFF0;
-    width: 100%;
-    max-width: 450px; 
-    min-height: 550px;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-
-    /* Proprietăți de layout (păstrate din versiunea anterioară) */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    
-    /* Centrare verticală adăugată pentru a menține consistența aplicației */
-    justify-content: center;
-    
-    padding: 40px;
-    box-sizing: border-box; /* Asigură că padding-ul nu mărește lățimea totală */
-    text-align: left; 
-}
+/* Stilul containerului: așezarea elementelor pe verticală, aliniate la stânga
 
 /* Săgeata de întoarcere (deasupra titlului) */
 .back-arrow-top {
@@ -90,4 +68,16 @@
     /* Menține box-shadow-ul, dar poți schimba și culoarea bordurii pentru feedback. */
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
     border-color: #007bff; /* Bordura devine albastră la focus */
+}
+.text-input.date-input {
+    appearance: none; 
+    -webkit-appearance: none;
+    text-align: left; 
+}
+
+.text-input.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(15%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+    cursor: pointer;
+    padding: 0;
+    margin-right: -10px; /* Trage iconița mai aproape de margine */
 }

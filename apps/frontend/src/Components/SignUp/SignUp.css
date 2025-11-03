@@ -1,4 +1,5 @@
 /* Wrapper pentru logo + container */
+
 .page-wrapper {
     display: flex;
     /* ✨ SCHIMBARE: Acum folosim 'center' pentru alinierea orizontală și 'center' pentru cea verticală */
