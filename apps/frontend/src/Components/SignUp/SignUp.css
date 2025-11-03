@@ -1,70 +1,125 @@
 /* Wrapper pentru logo + container */
 .page-wrapper {
     display: flex;
-    justify-content: flex-end; /* containerul spre dreapta */
-    align-items: center;
+    /* ✨ SCHIMBARE: Acum folosim 'center' pentru alinierea orizontală și 'center' pentru cea verticală */
+    justify-content: center; /* Centrează conținutul (logo + formular) pe orizontală */
+    align-items: center;    /* Centrează conținutul (logo + formular) pe verticală */
     height: 100vh;
-    padding: 20px;
+    padding: 20px 80px; 
     background: linear-gradient(to bottom, #001f6b, #007bff);
-    gap: 40px; /* spațiu între logo și container */
     box-sizing: border-box;
+    
+    /* ✨ NOU: Definim un 'gap' explicit pentru a crea spațiul dintre logo și formular */
+    gap: 80px; 
 }
 
-/* Logo-ul */
+/* 2. LOGO */
+.logo {
+    flex-shrink: 0; 
+}
 .logo img {
-    max-height: 150px;
+    /* ✨ Ajustare dimensiune pentru a se potrivi cu imaginea de design */
+    max-height: 250px; 
     width: auto;
     object-fit: contain;
 }
 
-/* Container */
+/* 3. CONTAINERUL ALB (Formularul) */
 .container {
-    background: #fff;
-    width: 90%;
-    max-width: 750px;
+    background: #EFEFF0;
+    width: 100%;
+    /* Lățimea containerului din design pare să fie în jur de 400px */
+    max-width: 400px; 
     min-height: 500px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 
+    /* Formularul va avea conținutul aliniat la stânga în mare parte, nu centrat */
     display: flex;
     flex-direction: column;
+    align-items: flex-start; 
     justify-content: center;
-    align-items: center;
-
+    
     padding: 40px;
     box-sizing: border-box;
-    text-align: center;
+    text-align: left; 
 }
 
-/* Google și Facebook */
+/* 4. TITLU (Header) */
+.header {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.header .text {
+    /* ✨ NOU: Stilul titlului */
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* 5. GRUPUL DE BUTOANE (Google și Facebook) */
 .GoogleFB {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin: 20px 0;
-}
-.GoogleFB div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.GoogleFB img {
-    height: 24px;
-    width: 24px;
+    gap: 15px;
+    margin: 10px 0 30px 0; /* Spațiu sus-jos */
+    width: 100%; /* Ocupă toată lățimea containerului */
 }
 
-/* Link-uri și texte */
+/* 6. STILUL INDIVIDUAL AL BUTONULUI (div.Google și div.Facebook) */
+.GoogleFB div {
+    display: flex;
+    justify-content: flex-end; /* Asigură alinierea stânga */
+    align-items: center;
+    gap: 12px; 
+    padding: 12px 12px; /* Spațiere mai mare în interior */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 90%;
+    transition: background-color 0.2s;
+}
+
+/* 7. STILUL BUTONULUI DE FACEBOOK (pentru fundal albastru) */
+.GoogleFB .Facebook {
+    background-color: #1877F2; /* Culoare de brand Facebook */
+    border: 1px solid #1877F2;
+    color: white;
+}
+.GoogleFB .Facebook:hover {
+    background-color: #0069d9;
+}
+/* Albește textul din butonul Facebook */
+.GoogleFB .Facebook a {
+    color: white !important;
+}
+
+/* 8. LINK-UL (Textul din butoane) */
+.GoogleFB a {
+    text-decoration: none;
+    color: #333; /* Textul negru pentru Google */
+    font-weight: 500;
+    font-size: 16px;
+    flex-grow: 1; 
+    text-align: left; 
+}
+
+/* 9. ALTE TEXTE */
 .AltMod {
     margin: 20px 0;
     font-weight: 500;
+    width: 100%;
+    text-align: center; /* Centrare pentru textul "Continuați în alt mod" */
 }
-
 .DejaCont {
     margin-top: 10px;
+    width: 100%;
+    /* ✨ SCHIMBARE: Centrare pentru textul "Aveți deja un cont?" */
+    text-align: center; 
 }
 .DejaCont a {
-    margin-left: 5px;
     color: #007bff;
     text-decoration: none;
 }
@@ -72,26 +127,29 @@
     text-decoration: underline;
 }
 
-/* Responsive mobil */
-@media (max-width: 720px) {
+/* 10. RESPONSIVE */
+@media (max-width: 992px) {
     .page-wrapper {
-        flex-direction: column;
+        flex-direction: column; 
         justify-content: center;
-        gap: 20px;
+        gap: 40px;
+        padding: 40px 20px; 
     }
-
     .logo img {
-        max-height: 100px;
+        max-height: 150px;
     }
-
     .container {
-        max-width: 100%;
-        width: 100%;
+        max-width: 400px; 
+        width: 90%; 
         min-height: auto;
         padding: 30px 20px;
+        align-items: center; /* Centrare pe mobil */
+        text-align: center;
     }
-
-    .GoogleFB {
-        flex-direction: column;
+    .header {
+        text-align: center; /* Se asigură că rămâne centrat și pe mobil */
+    }
+    .header .text {
+        text-align: center;
     }
 }
