@@ -8,8 +8,11 @@ public record RegisterDTO(
     string Telefon,
     DateOnly Data_Nasterii,
 
+
     string? Desc,
     int? Experienta,
     float? Pret_start,
-    string? Disponibilitate
+    string? Disponibilitate,
+    int Id_User,
+    int Id_Judet
 );
