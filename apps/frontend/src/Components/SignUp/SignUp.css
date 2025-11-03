@@ -126,6 +126,7 @@
 }
 .DejaCont {
     margin-top: 10px;
+    margin-bottom: 20px;
     width: 100%;
     /* ✨ SCHIMBARE: Centrare pentru textul "Aveți deja un cont?" */
     text-align: center; 

@@ -1,31 +1,93 @@
-.header-inregistrare {
+/* Stiluri pentru așezarea generală (presupunând că .page-wrapper și .container sunt deja stilizate) */
+
+/* Stilul containerului: așezarea elementelor pe verticală, aliniate la stânga */
+.container {
+    /* Proprietățile preluate din solicitare */
+    background: #EFEFF0;
     width: 100%;
-    margin-bottom: 30px;
+    max-width: 450px; 
+    min-height: 550px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+
+    /* Proprietăți de layout (păstrate din versiunea anterioară) */
     display: flex;
-    align-items: center;
-    gap: 20px;
-    text-align: left;
+    flex-direction: column;
+    align-items: flex-start; 
+    
+    /* Centrare verticală adăugată pentru a menține consistența aplicației */
+    justify-content: center;
+    
+    padding: 40px;
+    box-sizing: border-box; /* Asigură că padding-ul nu mărește lățimea totală */
+    text-align: left; 
 }
 
-/* Stilul pentru săgeata de întoarcere */
-.back-arrow {
-    /* Mărește dimensiunea săgeții pentru a fi un target ușor de apăsat */
-    font-size: 28px; 
+/* Săgeata de întoarcere (deasupra titlului) */
+.back-arrow-top {
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     color: #333;
-    padding: 5px; /* Adaugă padding pentru o zonă de click mai mare */
+    padding: 5px 0;
+    margin-bottom: 20px; 
+    align-self: flex-start; 
     transition: color 0.2s;
 }
 
-.back-arrow:hover {
+.back-arrow-top:hover {
     color: #007bff;
 }
 
-/* Stil pentru titlul Inregistrare */
-.title-text {
-    font-size: 24px;
+/* Stil pentru titlul "Înregistrare" */
+.title-text-large {
+    font-size: 28px; 
     font-weight: 700;
     color: #333;
-    margin: 0; /* Elimină marginile implicite */
+    margin: 0 0 30px 0; 
+}
+
+/* ✨ Stiluri pentru conținutul formularului */
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spațiu între grupurile de input-uri */
+}
+
+/* Stil pentru fiecare grup de input (etichetă + câmp) */
+.input-field-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Stil pentru etichetă (label) */
+.input-label {
+    font-size: 14px;
+    color: #6a6a6a; /* Gri deschis pentru etichetă */
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+/* ✨ Stiluri pentru câmpul de input (text-input) */
+.text-input {
+    width: 90%;
+    padding: 15px 20px;
+    
+    border: 1px solid #ccc; 
+    background-color: #f0f0f0; /* Fundal gri deschis */
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.text-input:focus {
+    /* Menține box-shadow-ul, dar poți schimba și culoarea bordurii pentru feedback. */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
+    border-color: #007bff; /* Bordura devine albastră la focus */
 }
