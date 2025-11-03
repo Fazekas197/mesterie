@@ -1,0 +1,31 @@
+.header-inregistrare {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+/* Stilul pentru săgeata de întoarcere */
+.back-arrow {
+    /* Mărește dimensiunea săgeții pentru a fi un target ușor de apăsat */
+    font-size: 28px; 
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    padding: 5px; /* Adaugă padding pentru o zonă de click mai mare */
+    transition: color 0.2s;
+}
+
+.back-arrow:hover {
+    color: #007bff;
+}
+
+/* Stil pentru titlul Inregistrare */
+.title-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin: 0; /* Elimină marginile implicite */
+}

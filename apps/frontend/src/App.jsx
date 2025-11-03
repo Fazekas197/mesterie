@@ -21,6 +21,9 @@ function App() {
       {paginaActiva === 'inregistrare' && (
         <Inregistrare />
       )}
+      {paginaActiva === 'inregistrare' && (
+  <Inregistrare onNavigare={navigeazaLa} /> // 👈 Aici este cheia
+)}
       
     </div>
   );
