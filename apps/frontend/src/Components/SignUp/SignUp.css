@@ -5,9 +5,16 @@
     justify-content: center; /* Centrează conținutul (logo + formular) pe orizontală */
     align-items: center;    /* Centrează conținutul (logo + formular) pe verticală */
     height: 100vh;
+    gap: 80px;
     padding: 20px 80px; 
     background: linear-gradient(to bottom, #001f6b, #007bff);
     box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Important: Asigură-te că ocupă toată lățimea */
+    height: 100vh;
     
     /* ✨ NOU: Definim un 'gap' explicit pentru a crea spațiul dintre logo și formular */
     gap: 80px; 
@@ -15,6 +22,9 @@
 
 /* 2. LOGO */
 .logo {
+    margin-left: auto;
+    margin-right: auto;
+
     flex-shrink: 0; 
 }
 .logo img {
