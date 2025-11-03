@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251102180210_specfavorit")]
+    partial class specfavorit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,29 +24,6 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.Models.Favorit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Id_meserias")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_user")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_meserias");
-
-                    b.HasIndex("Id_user");
-
-                    b.ToTable("Favorite");
-                });
 
             modelBuilder.Entity("Backend.Models.Judet", b =>
                 {
@@ -96,48 +76,6 @@ namespace Backend.Migrations
                     b.ToTable("Meseriasi");
                 });
 
-            modelBuilder.Entity("Backend.Models.Oferta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<float>("Buget")
-                        .HasColumnType("real");
-
-                    b.Property<DateOnly>("Created_at")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Id_judet")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_specializare")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_user")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Titlu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_judet");
-
-                    b.HasIndex("Id_specializare");
-
-                    b.HasIndex("Id_user");
-
-                    b.ToTable("Oferte");
-                });
-
             modelBuilder.Entity("Backend.Models.Specializare", b =>
                 {
                     b.Property<int>("Id")
@@ -167,7 +105,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("Id_specializare");
 
-                    b.ToTable("SpecializariMeseriasi");
+                    b.ToTable("SpecizalizariMeseriasi");
                 });
 
             modelBuilder.Entity("Backend.Models.Utilizator", b =>
@@ -209,26 +147,6 @@ namespace Backend.Migrations
                     b.ToTable("Utilizatori");
                 });
 
-            modelBuilder.Entity("Backend.Models.Favorit", b =>
-                {
-                    b.HasOne("Backend.Models.Meserias", "Meserias")
-                        .WithMany()
-                        .HasForeignKey("Id_meserias")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Utilizator", "Utilizator")
-                        .WithMany()
-                        .HasForeignKey("Id_user")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Meserias");
-
-                    b.Navigation("Utilizator");
-                });
-
             modelBuilder.Entity("Backend.Models.Meserias", b =>
                 {
                     b.HasOne("Backend.Models.Judet", "Judet")
@@ -244,33 +162,6 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Judet");
-
-                    b.Navigation("Utilizator");
-                });
-
-            modelBuilder.Entity("Backend.Models.Oferta", b =>
-                {
-                    b.HasOne("Backend.Models.Judet", "Judet")
-                        .WithMany()
-                        .HasForeignKey("Id_judet")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Specializare", "Specializare")
-                        .WithMany()
-                        .HasForeignKey("Id_specializare")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Utilizator", "Utilizator")
-                        .WithMany()
-                        .HasForeignKey("Id_user")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Judet");
-
-                    b.Navigation("Specializare");
 
                     b.Navigation("Utilizator");
                 });
