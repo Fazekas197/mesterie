@@ -1,5 +1,5 @@
 import './PagParola.css';
-import LogoAlb from '../../Assets/LogoAlb.svg'; // Ajustează calea la Assets
+import LogoAlb from '../Assets/LogoAlb.svg'; // Ajustează calea la Assets
 import React, { useState } from 'react';
 
 const PagParola = ({onNavigare}) =>{

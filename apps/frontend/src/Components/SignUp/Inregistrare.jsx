@@ -28,13 +28,17 @@ const Inregistrare = ({onNavigare}) =>{
         return Object.keys(newErrors).length === 0;
     };
     const handleSubmit = () => {
-        if (validateForm()) {
-            console.log('Formular valid:', formData);
-            // Aici se poate adăuga logica pentru Pasul 2 sau submit
-        } else {
-            console.log('Erori de validare găsite.');
-        }
-    };
+    // 1. Verifică validarea
+    if (validateForm()) {
+        // 2. Navighează la Pagina Parola (cheia 'parola' definită în App.jsx)
+        onNavigare('parola'); // 👈 ACEASTA ESTE ACȚIUNEA DORITĂ
+        
+    } else {
+        // Dacă validarea eșuează, erorile roșii se vor afișa
+        // (Acest else este în interiorul funcției validateForm, deci e deja gestionat)
+        console.log('Eroare: Formularul nu este completat.');
+    }
+};
     return (
         <div className="page-wrapper">
 
@@ -90,6 +94,19 @@ const Inregistrare = ({onNavigare}) =>{
                         />
                     </div>
                     <div className="input-field-group">
+                        <div className="input-field-group">
+    <label htmlFor="dataNastere" className="input-label">Data nașterii</label>
+    <input 
+        type="date" 
+        id="dataNastere"
+        // Aplică clasa de eroare dacă errors.dataNastere este true
+        className={`text-input date-input ${errors.dataNastere ? 'input-error' : ''}`}
+        // Valoarea din starea React
+        value={formData.dataNastere} 
+        // Handler-ul care actualizează starea și curăță erorile
+        onChange={handleChange} 
+    />
+</div>
                 <label htmlFor="phone" className="input-label">Phone Number</label>
 
                 {/* Aplicăm clasa condițional pe wrapper, nu pe input-ul din interior! */}
@@ -121,7 +138,6 @@ const Inregistrare = ({onNavigare}) =>{
             </div>          
         </div>
     );
-    
 }
 
 export default Inregistrare;
