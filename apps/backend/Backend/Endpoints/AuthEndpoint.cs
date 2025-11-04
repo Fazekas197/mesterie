@@ -55,6 +55,9 @@ public static class AuthEndpoints
                 await db.SaveChangesAsync();
             }
         });
+        group.MapPost("/login", async (AppDbContext db, LoginDTO login) =>
+        {
 
+        });
     }
 }
