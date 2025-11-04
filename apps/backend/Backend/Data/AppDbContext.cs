@@ -17,6 +17,9 @@ public class AppDbContext : DbContext
     public DbSet<SpecializareMeserias> SpecializariMeseriasi { get; set; } = null!;
     public DbSet<Favorit> Favorite { get; set; } = null!;
     public DbSet<Oferta> Oferte { get; set; } = null!;
+    public DbSet<Review> Reviews { get; set; } = null!;
+    public DbSet<Aplicare> Aplicari { get; set; } = null!;
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -65,5 +68,42 @@ public class AppDbContext : DbContext
             .HasPrincipalKey(m => m.Id) // FK points to alternate key
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<Review>()
+            .HasKey(r => r.Id);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Utilizator)
+            .WithMany() // optionally: .WithMany(u => u.Reviews)
+            .HasForeignKey(r => r.Id_User)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Reviews)
+            .HasForeignKey(r => r.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references Meserias.Id (alternate key)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // -------------------------------
+        // Aplicare
+        // -------------------------------
+        modelBuilder.Entity<Aplicare>()
+            .HasKey(a => a.Id);
+
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Oferta)
+            .WithMany() // optionally: .WithMany(o => o.Aplicari)
+            .HasForeignKey(a => a.Id_Oferta)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Aplicari)
+            .HasForeignKey(a => a.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references alternate key in Meserias
+            .OnDelete(DeleteBehavior.Restrict);
+
     }
+
+
 }

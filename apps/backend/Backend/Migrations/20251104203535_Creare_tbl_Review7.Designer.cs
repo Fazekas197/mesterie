@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251104203535_Creare_tbl_Review7")]
+    partial class Creare_tbl_Review7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,40 +24,6 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.Models.Aplicare", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateOnly>("Created_at")
-                        .HasColumnType("date");
-
-                    b.Property<int>("Id_Meserias")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_Oferta")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Mesaj")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_Meserias");
-
-                    b.HasIndex("Id_Oferta");
-
-                    b.ToTable("Aplicari");
-                });
 
             modelBuilder.Entity("Backend.Models.Favorit", b =>
                 {
@@ -279,26 +248,6 @@ namespace Backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Utilizatori");
-                });
-
-            modelBuilder.Entity("Backend.Models.Aplicare", b =>
-                {
-                    b.HasOne("Backend.Models.Meserias", "Meserias")
-                        .WithMany()
-                        .HasForeignKey("Id_Meserias")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Oferta", "Oferta")
-                        .WithMany()
-                        .HasForeignKey("Id_Oferta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Meserias");
-
-                    b.Navigation("Oferta");
                 });
 
             modelBuilder.Entity("Backend.Models.Favorit", b =>

@@ -1,10 +1,10 @@
+using System.Text;
 using Backend.Data;
 using Backend.Endpoints;
 using DotNetEnv;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
