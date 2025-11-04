@@ -1,15 +1,14 @@
+using System.IdentityModel.Tokens.Jwt;  // for JwtRegisteredClaimNames
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;           // for Claim
+using System.Text;
 using Backend.Data;
 using Backend.DTOs;
 using Backend.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
-using System.Text;
-using System.Security.Claims;           // for Claim
-using System.IdentityModel.Tokens.Jwt;  // for JwtRegisteredClaimNames
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.IdentityModel.Tokens;
 using Sprache;
 
 namespace Backend.Endpoints;
