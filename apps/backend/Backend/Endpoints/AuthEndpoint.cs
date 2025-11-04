@@ -1,9 +1,16 @@
+using System.Reflection.Metadata.Ecma335;
 using Backend.Data;
 using Backend.DTOs;
 using Backend.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
+using System.Text;
+using System.Security.Claims;           // for Claim
+using System.IdentityModel.Tokens.Jwt;  // for JwtRegisteredClaimNames
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+
+using Sprache;
 
 namespace Backend.Endpoints;
 
@@ -55,6 +62,40 @@ public static class AuthEndpoints
                 await db.SaveChangesAsync();
             }
         });
+        group.MapPost("/login", async (AppDbContext db, LoginDTO login) =>
+        {
+            if (login == null || string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Parola))
+                return Results.BadRequest(new { message = "Email and password must be provided." });
 
+            var user = await db.Utilizatori.FirstOrDefaultAsync(u => u.Email == login.Email);
+            if (user == null)
+                return Results.BadRequest(new { message = "User not found." });
+
+            bool passwordValid = BCrypt.Net.BCrypt.Verify(login.Parola, user.Parola_Hash);
+            if (!passwordValid)
+                return Results.BadRequest(new { message = "Invalid password." });
+
+            var JwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+            if (string.IsNullOrEmpty(JwtSecret))
+                throw new Exception("Jwt nu este in env");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSecret));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            };
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddDays(7),
+                signingCredentials: creds
+            );
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            return Results.Ok(new { token = tokenString });
+        });
+        group.MapGet("/test", async (AppDbContext db) =>
+        {
+            return Results.Ok("Autorizat");
+        }).RequireAuthorization();
     }
 }
