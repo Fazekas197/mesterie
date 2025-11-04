@@ -93,5 +93,9 @@ public static class AuthEndpoints
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             return Results.Ok(new { token = tokenString });
         });
+        group.MapGet("/test", async (AppDbContext db) =>
+        {
+            return Results.Ok("Autorizat");
+        }).RequireAuthorization();
     }
 }
