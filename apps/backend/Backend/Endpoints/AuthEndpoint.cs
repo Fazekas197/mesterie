@@ -41,8 +41,20 @@ public static class AuthEndpoints
                 };
                 await db.Meseriasi.AddAsync(createdMeserias);
                 await db.SaveChangesAsync();
-            }
+                for (int i = 0; i < user.SpecializariId.Count; i++)
+                {
+                    var specializareId = user.SpecializariId[i];
 
+                    var link = new SpecializareMeserias
+                    {
+                        Id_meserias = createdMeserias.Id,
+                        Id_specializare = specializareId
+                    };
+                    await db.SpecializariMeseriasi.AddAsync(link);
+                    await db.SaveChangesAsync();
+                }
+            }
         });
+
     }
 }

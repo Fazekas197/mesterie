@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Routing.Constraints;
+
 namespace Backend.DTOs;
 
 public record RegisterDTO(
@@ -14,5 +16,10 @@ public record RegisterDTO(
     float Pret_start,
     string Disponibilitate,
     int Id_User,
-    int Id_Judet
+    int Id_Judet,
+
+    List<int> SpecializariId
+
+
+
 );
