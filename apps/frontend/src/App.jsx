@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import SignUp from "./Components/SignUp/SignUp";
 import Inregistrare from './Components/SignUp/Inregistrare';
-
+import PagParola from './Components/SignUp/PagParola'; // 👈 Noul Import
 
 function App() {
 
@@ -18,12 +18,16 @@ function App() {
       {paginaActiva === 'signup' && (
         <SignUp onNavigare={navigeazaLa} />
       )}
+      
+      {/* Asigură-te că Inregistrare primește onNavigare pentru săgeata de întoarcere */}
       {paginaActiva === 'inregistrare' && (
-        <Inregistrare />
+        <Inregistrare onNavigare={navigeazaLa} /> 
       )}
-      {paginaActiva === 'inregistrare' && (
-  <Inregistrare onNavigare={navigeazaLa} /> // 👈 Aici este cheia
-)}
+
+      {/* 👈 NOU: Condiția pentru afișarea paginii PagParola */}
+      {paginaActiva === 'parola' && (
+        <PagParola onNavigare={navigeazaLa} />
+      )}
       
     </div>
   );

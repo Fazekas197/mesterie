@@ -40,11 +40,12 @@
     background: #EFEFF0;
     width: 100%;
     /* Lățimea containerului din design pare să fie în jur de 400px */
-    max-width: 450px; 
-    min-height: 550px;
+    max-width: 430px; 
+    min-height: 530px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-height: 100%;
 
     /* Formularul va avea conținutul aliniat la stânga în mare parte, nu centrat */
     display: flex;
@@ -136,6 +137,8 @@
 .DejaCont a {
     color: #007bff;
     text-decoration: none;
+    margin-left: 5px;
+
 }
 .DejaCont a:hover {
     text-decoration: underline;

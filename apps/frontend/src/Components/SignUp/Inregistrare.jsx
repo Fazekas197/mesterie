@@ -1,7 +1,40 @@
 import './Inregistrare.css';
 import LogoAlb from '../Assets/LogoAlb.svg';
+import React, { useState } from 'react';
 
 const Inregistrare = ({onNavigare}) =>{
+    const [formData, setFormData] = useState({
+        numeComplet: '',
+        email: '',
+        dataNastere: '',
+        telefon: ''
+    });
+    const [errors, setErrors] = useState({});
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+        // Curăță eroarea la tastare
+        if (errors[e.target.id]) {
+            setErrors({ ...errors, [e.target.id]: false });
+        }
+    };
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.numeComplet.trim()) newErrors.numeComplet = true;
+        if (!formData.email.trim()) newErrors.email = true;
+        if (!formData.dataNastere) newErrors.dataNastere = true;
+        if (!formData.telefon.trim()) newErrors.telefon = true;
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+    const handleSubmit = () => {
+        if (validateForm()) {
+            console.log('Formular valid:', formData);
+            // Aici se poate adăuga logica pentru Pasul 2 sau submit
+        } else {
+            console.log('Erori de validare găsite.');
+        }
+    };
     return (
         <div className="page-wrapper">
 
@@ -20,6 +53,11 @@ const Inregistrare = ({onNavigare}) =>{
 
                 {/* 2. Titlul într-un alt bloc (sau direct în container) */}
                 <h1 className="title-text-large">Înregistrare</h1>
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-message">
+                        Vă rugăm să completați toate câmpurile.
+                    </div>
+                 )}
                 <div className="DejaCont">
                     Aveți deja un cont?
                     <a href="https://www.google.com/">Autentificare</a>
@@ -29,60 +67,61 @@ const Inregistrare = ({onNavigare}) =>{
                     {/* Câmpul 1: Nume și prenume complet */}
                     <div className="input-field-group">
                         <label htmlFor="numeComplet" className="input-label">Nume și prenume complet</label>
-                        <input 
-                            type="text" 
-                            id="numeComplet"
-                            className="text-input"
-                            placeholder="Nume Prenume"
-                        />
+                    <input 
+                        type="text" 
+                        id="numeComplet"
+                        className={`text-input ${errors.numeComplet ? 'input-error' : ''}`} // Aplicare condițională
+                        placeholder="Nume Prenume"
+                        value={formData.numeComplet} // Valoarea din stare
+                        onChange={handleChange} // Handler la schimbare
+                    />
                     </div>
 
                     {/* Câmpul 2: Adresă de e-mail */}
                     <div className="input-field-group">
                         <label htmlFor="email" className="input-label">Adresă de e-mail</label>
                         <input 
-                            type="email" 
-                            id="email"
-                            className="text-input"
-                            placeholder="numeprenume@gmail.com"
+                        type="email" 
+                        id="email"
+                        className={`text-input ${errors.email ? 'input-error' : ''}`}
+                        placeholder="numeprenume@gmail.com"
+                        value={formData.email}
+                        onChange={handleChange}
                         />
                     </div>
                     <div className="input-field-group">
-                        <label htmlFor="dataNastere" className="input-label">Data nașterii</label>
-                        <input 
-                            type="date" 
-                            id="dataNastere"
-                            className="text-input date-input" 
-                        />
-                    </div>
-                    <div className="input-field-group">
-                        <label htmlFor="phone" className="input-label">Phone Number</label>
-    
-                            <div className="phone-input-wrapper">
-                            <div className="country-selector">
+                <label htmlFor="phone" className="input-label">Phone Number</label>
+
+                {/* Aplicăm clasa condițional pe wrapper, nu pe input-ul din interior! */}
+                 <div className={`phone-input-wrapper ${errors.telefon ? 'input-error' : ''}`}>
+                    <div className="country-selector">
                             {/* 🇷🇴 Drapelul României ca emoji sau simbol custom */}
                             <span role="img" aria-label="Romania flag">🇷🇴</span> 
-                             <span>+40</span>
+                            <span>+40</span>
                             {/* Săgeata în jos */}
                             <span>&#9662;</span>
                         </div>
         
-                        <input 
-                                type="tel" 
-                                id="phone"
-                                className="phone-input-field"
-                                placeholder="000-000-000"
-                            />
+                            {/* Conectăm input-ul la starea formularului */}
+                            <input 
+                            type="tel" 
+                            id="telefon" // 👈 ID-ul din starea 'formData.telefon'
+                            className="phone-input-field"
+                            placeholder="000-000-000"
+                            value={formData.telefon} // 👈 Valoarea din stare
+                            onChange={handleChange}  // 👈 Handler-ul la schimbare
+                         />
                         </div>
                     </div>
-                    
-                   
-                    
+                    <button className="next-step-button" onClick={handleSubmit}>
+                        Pasul următor
+                    </button>            
                 </div>
 
             </div>          
         </div>
     );
+    
 }
 
 export default Inregistrare;

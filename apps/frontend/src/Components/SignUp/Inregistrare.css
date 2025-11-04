@@ -1,15 +1,11 @@
-/* Stiluri pentru așezarea generală (presupunând că .page-wrapper și .container sunt deja stilizate) */
 
-/* Stilul containerului: așezarea elementelor pe verticală, aliniate la stânga
-
-/* Săgeata de întoarcere (deasupra titlului) */
 .back-arrow-top {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     color: #333;
     padding: 5px 0;
-    margin-bottom: 20px; 
+    margin-bottom: 5px; 
     align-self: flex-start; 
     transition: color 0.2s;
 }
@@ -23,7 +19,7 @@
     font-size: 28px; 
     font-weight: 700;
     color: #333;
-    margin: 0 0 30px 0; 
+    margin: 0 0 5px 0; 
 }
 
 /* ✨ Stiluri pentru conținutul formularului */
@@ -119,4 +115,47 @@
     outline: none;
     padding: 0;
     height: 100%;
+}
+.next-step-button {
+    /* ✨ Poziționare și dimensiune */
+    width: 100%; /* Se extinde pe toată lățimea formularului */
+    padding: 15px;
+    
+    
+    /* ✨ Culoare și aspect */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    
+    /* ✨ Tipografie */
+    font-size: 18px;
+    font-weight: 600;
+    
+    /* ✨ Interacțiune */
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.next-step-button:hover {
+    background-color: #0069d9; /* Culoare mai închisă la hover */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+.error-message {
+    width: 100%;
+    color: #e53e3e; /* Roșu */
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Stil pentru input-urile standard care au eroare */
+.text-input.input-error {
+    border-color: #e53e3e; /* Roșu intens pentru chenar */
+}
+
+/* Stil pentru wrapper-ul de telefon care are eroare */
+.phone-input-wrapper.input-error {
+    border-color: #e53e3e; /* Roșu intens pentru chenar */
 }
