@@ -51,8 +51,8 @@ public static class AuthEndpoints
                         Id_specializare = specializareId
                     };
                     await db.SpecializariMeseriasi.AddAsync(link);
-                    await db.SaveChangesAsync();
                 }
+                await db.SaveChangesAsync();
             }
         });
 
