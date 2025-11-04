@@ -1,9 +1,11 @@
+using System.Reflection.Metadata.Ecma335;
 using Backend.Data;
 using Backend.DTOs;
 using Backend.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Sprache;
 
 namespace Backend.Endpoints;
 
@@ -57,7 +59,18 @@ public static class AuthEndpoints
         });
         group.MapPost("/login", async (AppDbContext db, LoginDTO login) =>
         {
+            if (login == null || string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Parola))
+                return Results.BadRequest(new { message = "Email and password must be provided." });
 
+            var user = await db.Utilizatori.FirstOrDefaultAsync(u => u.Email == login.Email);
+            if (user == null)
+                return Results.BadRequest(new { message = "User not found." });
+
+            bool passwordValid = BCrypt.Net.BCrypt.Verify(login.Parola, user.Parola_Hash);
+            if (!passwordValid)
+                return Results.BadRequest(new { message = "Invalid password." });
+
+            return Results.Ok(new { message = "Login successful!" });
         });
     }
 }
