@@ -18,6 +18,8 @@ public class AppDbContext : DbContext
     public DbSet<Favorit> Favorite { get; set; } = null!;
     public DbSet<Oferta> Oferte { get; set; } = null!;
     public DbSet<Review> Reviews {get;set;} = null!;
+    public DbSet<Aplicare> Aplicari {get;set;} = null!;
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -82,5 +84,26 @@ modelBuilder.Entity<Review>()
     .HasPrincipalKey(m => m.Id) // references Meserias.Id (alternate key)
     .OnDelete(DeleteBehavior.Cascade);
 
+       // -------------------------------
+// Aplicare
+// -------------------------------
+modelBuilder.Entity<Aplicare>()
+    .HasKey(a => a.Id);
+
+modelBuilder.Entity<Aplicare>()
+    .HasOne(a => a.Oferta)
+    .WithMany() // optionally: .WithMany(o => o.Aplicari)
+    .HasForeignKey(a => a.Id_Oferta)
+    .OnDelete(DeleteBehavior.Cascade);
+
+modelBuilder.Entity<Aplicare>()
+    .HasOne(a => a.Meserias)
+    .WithMany() // optionally: .WithMany(m => m.Aplicari)
+    .HasForeignKey(a => a.Id_Meserias)
+    .HasPrincipalKey(m => m.Id) // references alternate key in Meserias
+    .OnDelete(DeleteBehavior.Restrict);
+
     }
+
+ 
 }
