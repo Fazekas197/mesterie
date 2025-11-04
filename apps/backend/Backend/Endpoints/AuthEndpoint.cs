@@ -97,5 +97,11 @@ public static class AuthEndpoints
         {
             return Results.Ok("Autorizat");
         }).RequireAuthorization();
+        group.MapGet("/data", async (AppDbContext db) =>
+         {
+             var judete = await db.Judete.ToListAsync();
+             var specializari = await db.Specializari.ToListAsync();
+             return Results.Ok(new { judete, specializari });
+         });
     }
 }
