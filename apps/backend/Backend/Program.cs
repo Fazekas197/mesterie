@@ -20,5 +20,6 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 
 app.MapJudeteEndpoints();
+app.MapAuthEndpoints();
 
 app.Run();

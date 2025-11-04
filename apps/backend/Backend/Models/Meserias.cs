@@ -10,6 +10,7 @@ namespace Backend.Models;
 public class Meserias
 {
     [Required]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     [Required]
     [ForeignKey("Utilizator")]
