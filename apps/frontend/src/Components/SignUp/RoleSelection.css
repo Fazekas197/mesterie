@@ -1,0 +1,66 @@
+/* 1. Stiluri pentru containerul opțiunilor de rol */
+.role-options-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Așază opțiunile una sub alta */
+    gap: 15px;
+    /* Spațiu între opțiunile Client și Meșter */
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* 2. Stilul pentru fiecare opțiune (Clien/Meșter) */
+.role-option {
+    display: flex;
+    align-items: center;
+    width: 90%;
+
+    /* Stilul chenarului */
+    padding: 15px 20px;
+    border: 1px solid #ccc;
+    /* Chenarul implicit (gri deschis) */
+    border-radius: 8px;
+    background-color: #ffffff;
+    /* Fundal alb */
+
+    /* Tipografie și iconițe */
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+/* 3. Stilul Iconițelor */
+.role-icon {
+    margin-right: 15px;
+    /* Spațiu între iconiță și text */
+    color: #6a6a6a;
+    /* Culoare gri pentru iconița implicită */
+}
+
+/* 4. Stilul Când o Opțiune este Selectată (clasa .selected) */
+.role-option.selected {
+    /* ✨ Fundal albastru plin */
+    background-color: #007bff;
+
+    /* Textul și iconița devin albe */
+    color: white;
+
+    /* Eliminăm bordura subtilă și o înlocuim cu un box-shadow subtil */
+    border-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.role-option:hover {
+    border-color: #007bff;
+    /* Evidențiază chenarul la hover */
+}
+
+.role-icon-img {
+    /* ... dimensiuni ... */
+    /* Nu putem schimba culoarea unei imagini importate, dar putem încerca să o desaturăm dacă e colorată */
+    filter: grayscale(0%);
+    /* Asigură că imaginea își păstrează culorile originale */
+}

@@ -1,0 +1,233 @@
+/* Variabilele de culori */
+:root {
+  --primary-blue: #0052cc;
+  --dark-blue: #0A2342;
+  --text-gray: #5e6c84;
+  --text-dark: #172b4d;
+  --border-color: #dfe1e6;
+  --page-bg-gradient: linear-gradient(to bottom, #001f6b, #007bff);
+}
+
+/* Containerul principal al paginii */
+.login-page-container {
+  display: flex;
+  flex-direction: row;
+  /* Stânga-dreapta */
+  height: 100vh;
+  width: 100%;
+  background: var(--page-bg-gradient);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+}
+
+/* === COLOANA STÂNGĂ (Logo) === */
+.logo-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* Centrează logo-ul pe orizontală */
+  align-items: center;
+  /* Centrează logo-ul pe verticală */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.login-logo {
+  max-height: 460px;
+  width: auto;
+  /*height: auto;*/
+  object-fit: contain;
+}
+
+/* === COLOANA DREAPTĂ (Formular) === */
+/* ACEASTA ERA PROBLEMA TA: Acum este la locul corect */
+.login-form-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* Centrează cardul pe orizontală */
+  align-items: center;
+  /* Centrează cardul pe verticală */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Cardul alb de login (Conținutul din dreapta) */
+.login-card {
+  /* Am scos 'flex: 1' și 'min-height' */
+  background: #fff;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: left;
+  position: relative;
+}
+
+/* === Stiluri comune (Butoane, Câmpuri, etc.) === */
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.login-card h2 {
+  text-align: left;
+  color: var(--text-dark);
+  font-size: 1.8rem;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.register-link {
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin-bottom: 24px;
+}
+
+.register-link a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+}
+
+.password-wrapper {
+  /*position: relative;
+  display: flex;
+  align-items: center;*/
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.password-wrapper input {
+  /*padding-right: 40px;*/
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-right: 40px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 12px;
+  color: var(--text-gray);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-blue);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #0041a3;
+}
+
+/* === Responsive Mobil === */
+@media (max-width: 900px) {
+  .login-page-container {
+    flex-direction: column;
+    /* Se pun una peste alta */
+    justify-content: center;
+    height: auto;
+    min-height: 100vh;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  /* Ambele coloane ocupă 100% lățime pe mobil */
+  .logo-container,
+  .login-form-container {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background-color: transparent;
+    /* Resetează fundalul pe mobil */
+  }
+
+  .login-logo {
+    max-width: 200px;
+  }
+
+  .login-card {
+    min-height: auto;
+  }
+
+  .error-message {
+    color: #ff0000;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 16px;
+    margin-top: -8px;
+  }
+
+  .form-group input.input-error {
+    border-color: #ff0000 !important;
+    border-width: 2px;
+  }
+
+  .password-wrapper.input-error {
+    border-color: #ff0000 !important;
+    border-width: 2px;
+  }
+}

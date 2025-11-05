@@ -1,0 +1,161 @@
+
+.back-arrow-top {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    padding: 5px 0;
+    margin-bottom: 5px; 
+    align-self: flex-start; 
+    transition: color 0.2s;
+}
+
+.back-arrow-top:hover {
+    color: #007bff;
+}
+
+/* Stil pentru titlul "Înregistrare" */
+.title-text-large {
+    font-size: 28px; 
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0; 
+}
+
+/* ✨ Stiluri pentru conținutul formularului */
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spațiu între grupurile de input-uri */
+}
+
+/* Stil pentru fiecare grup de input (etichetă + câmp) */
+.input-field-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Stil pentru etichetă (label) */
+.input-label {
+    font-size: 14px;
+    color: #6a6a6a; /* Gri deschis pentru etichetă */
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.text-input {
+    width: 90%;
+    padding: 15px 20px;
+    
+    border: 1px solid #ccc; 
+    background-color: #f0f0f0; /* Fundal gri deschis */
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.text-input:focus {
+    /* Menține box-shadow-ul, dar poți schimba și culoarea bordurii pentru feedback. */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
+    border-color: #007bff; /* Bordura devine albastră la focus */
+}
+.text-input.date-input {
+    appearance: none; 
+    -webkit-appearance: none;
+    text-align: left; 
+}
+
+.text-input.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(15%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+    cursor: pointer;
+    padding: 0;
+    margin-right: -10px; /* Trage iconița mai aproape de margine */
+}
+.phone-input-wrapper {
+    /* Aplica aceleași stiluri vizuale ca text-input */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px; /* Padding interior */
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-sizing: border-box; 
+    cursor: text; 
+}
+.phone-input-wrapper:focus-within {
+    border-color: #007bff; 
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); 
+}
+.country-selector {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    margin-right: 15px;
+    border-right: 1px solid #ccc; /* Linia de separare verticală */
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+}
+.country-selector span {
+    margin-right: 5px;
+}
+.phone-input-field {
+    flex-grow: 1; /* Ocupă tot spațiul rămas */
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    padding: 0;
+    height: 100%;
+}
+.next-step-button {
+    /* ✨ Poziționare și dimensiune */
+    width: 100%; /* Se extinde pe toată lățimea formularului */
+    padding: 15px;
+    
+    
+    /* ✨ Culoare și aspect */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    
+    /* ✨ Tipografie */
+    font-size: 18px;
+    font-weight: 600;
+    
+    /* ✨ Interacțiune */
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.next-step-button:hover {
+    background-color: #0069d9; /* Culoare mai închisă la hover */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+.error-message {
+    width: 100%;
+    color: #e53e3e; /* Roșu */
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Stil pentru input-urile standard care au eroare */
+.text-input.input-error {
+    border-color: #e53e3e; /* Roșu intens pentru chenar */
+}
+
+/* Stil pentru wrapper-ul de telefon care are eroare */
+.phone-input-wrapper.input-error {
+    border-color: #e53e3e; /* Roșu intens pentru chenar */
+}
