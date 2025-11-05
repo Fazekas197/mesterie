@@ -32,6 +32,7 @@ public static class AuthEndpoints
                 Parola_Hash = BCrypt.Net.BCrypt.HashPassword(user.Parola)
             };
 
+
             await db.Utilizatori.AddAsync(createdUser);
             await db.SaveChangesAsync();
             if (user.EsteMeserias == true)
