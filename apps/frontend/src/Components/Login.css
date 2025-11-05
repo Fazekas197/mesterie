@@ -11,7 +11,8 @@
 /* Containerul principal al paginii */
 .login-page-container {
   display: flex;
-  flex-direction: row; /* Stânga-dreapta */
+  flex-direction: row;
+  /* Stânga-dreapta */
   height: 100vh;
   width: 100%;
   background: var(--page-bg-gradient);
@@ -25,8 +26,10 @@
   width: 50%;
   height: 100%;
   display: flex;
-  justify-content: center; /* Centrează logo-ul pe orizontală */
-  align-items: center; /* Centrează logo-ul pe verticală */
+  justify-content: center;
+  /* Centrează logo-ul pe orizontală */
+  align-items: center;
+  /* Centrează logo-ul pe verticală */
   padding: 40px;
   box-sizing: border-box;
 }
@@ -44,8 +47,10 @@
   width: 50%;
   height: 100%;
   display: flex;
-  justify-content: center; /* Centrează cardul pe orizontală */
-  align-items: center; /* Centrează cardul pe verticală */
+  justify-content: center;
+  /* Centrează cardul pe orizontală */
+  align-items: center;
+  /* Centrează cardul pe verticală */
   padding: 40px;
   box-sizing: border-box;
 }
@@ -180,7 +185,8 @@
 /* === Responsive Mobil === */
 @media (max-width: 900px) {
   .login-page-container {
-    flex-direction: column; /* Se pun una peste alta */
+    flex-direction: column;
+    /* Se pun una peste alta */
     justify-content: center;
     height: auto;
     min-height: 100vh;
@@ -194,7 +200,8 @@
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: transparent; /* Resetează fundalul pe mobil */
+    background-color: transparent;
+    /* Resetează fundalul pe mobil */
   }
 
   .login-logo {
@@ -205,22 +212,22 @@
     min-height: auto;
   }
 
-.error-message {
-  color: #ff0000;
-  font-size: 0.9rem;
-  font-weight: 500; 
-  text-align: left;
-  margin-bottom: 16px;
-  margin-top: -8px;
-}
+  .error-message {
+    color: #ff0000;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 16px;
+    margin-top: -8px;
+  }
 
-.form-group input.input-error
-{
-  border-color: #ff0000 !important;
-  border-width: 2px;
-}
-.password-wrapper.input-error {
-  border-color: #ff0000 !important;
-  border-width: 2px;
-}
+  .form-group input.input-error {
+    border-color: #ff0000 !important;
+    border-width: 2px;
+  }
+
+  .password-wrapper.input-error {
+    border-color: #ff0000 !important;
+    border-width: 2px;
+  }
 }

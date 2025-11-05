@@ -3,22 +3,25 @@
 .page-wrapper {
     display: flex;
     /* ✨ SCHIMBARE: Acum folosim 'center' pentru alinierea orizontală și 'center' pentru cea verticală */
-    justify-content: center; /* Centrează conținutul (logo + formular) pe orizontală */
-    align-items: center;    /* Centrează conținutul (logo + formular) pe verticală */
+    justify-content: center;
+    /* Centrează conținutul (logo + formular) pe orizontală */
+    align-items: center;
+    /* Centrează conținutul (logo + formular) pe verticală */
     height: 100vh;
     gap: 40px;
-    padding: 20px 80px; 
+    padding: 20px 80px;
     background: linear-gradient(to bottom, #001f6b, #007bff);
     box-sizing: border-box;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%; /* Important: Asigură-te că ocupă toată lățimea */
+    width: 100%;
+    /* Important: Asigură-te că ocupă toată lățimea */
     height: 100vh;
-    
+
     /* ✨ NOU: Definim un 'gap' explicit pentru a crea spațiul dintre logo și formular */
-    gap: 80px; 
+    gap: 80px;
 }
 
 /* 2. LOGO */
@@ -26,11 +29,12 @@
     margin-left: auto;
     margin-right: auto;
 
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
+
 .logo img {
     /* ✨ Ajustare dimensiune pentru a se potrivi cu imaginea de design */
-    max-height: 460px; 
+    max-height: 460px;
     width: auto;
     object-fit: contain;
 }
@@ -40,7 +44,7 @@
     background: #EFEFF0;
     width: 100%;
     /* Lățimea containerului din design pare să fie în jur de 400px */
-    max-width: 430px; 
+    max-width: 430px;
     min-height: 530px;
     height: auto;
     border-radius: 16px;
@@ -50,12 +54,12 @@
     /* Formularul va avea conținutul aliniat la stânga în mare parte, nu centrat */
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
+    align-items: flex-start;
     justify-content: center;
-    
+
     padding: 40px;
     box-sizing: border-box;
-    text-align: left; 
+    text-align: left;
 }
 
 /* 4. TITLU (Header) */
@@ -64,6 +68,7 @@
     margin-bottom: 30px;
     text-align: center;
 }
+
 .header .text {
     /* ✨ NOU: Stilul titlului */
     font-size: 24px;
@@ -76,17 +81,21 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 10px 0 30px 0; /* Spațiu sus-jos */
-    width: 100%; /* Ocupă toată lățimea containerului */
+    margin: 10px 0 30px 0;
+    /* Spațiu sus-jos */
+    width: 100%;
+    /* Ocupă toată lățimea containerului */
 }
 
 /* 6. STILUL INDIVIDUAL AL BUTONULUI (div.Google și div.Facebook) */
 .GoogleFB div {
     display: flex;
-    justify-content: flex-end; /* Asigură alinierea stânga */
+    justify-content: flex-end;
+    /* Asigură alinierea stânga */
     align-items: center;
-    gap: 12px; 
-    padding: 12px 12px; /* Spațiere mai mare în interior */
+    gap: 12px;
+    padding: 12px 12px;
+    /* Spațiere mai mare în interior */
     border: 1px solid #ccc;
     border-radius: 6px;
     cursor: pointer;
@@ -96,13 +105,16 @@
 
 /* 7. STILUL BUTONULUI DE FACEBOOK (pentru fundal albastru) */
 .GoogleFB .Facebook {
-    background-color: #1877F2; /* Culoare de brand Facebook */
+    background-color: #1877F2;
+    /* Culoare de brand Facebook */
     border: 1px solid #1877F2;
     color: white;
 }
+
 .GoogleFB .Facebook:hover {
     background-color: #0069d9;
 }
+
 /* Albește textul din butonul Facebook */
 .GoogleFB .Facebook a {
     color: white !important;
@@ -111,11 +123,12 @@
 /* 8. LINK-UL (Textul din butoane) */
 .GoogleFB a {
     text-decoration: none;
-    color: #333; /* Textul negru pentru Google */
+    color: #333;
+    /* Textul negru pentru Google */
     font-weight: 500;
     font-size: 16px;
-    flex-grow: 1; 
-    text-align: left; 
+    flex-grow: 1;
+    text-align: left;
 }
 
 /* 9. ALTE TEXTE */
@@ -123,23 +136,27 @@
     margin: 20px 0;
     font-weight: 500;
     width: 100%;
-    text-align: center; /* Centrare pentru textul "Continuați în alt mod" */
+    text-align: center;
+    /* Centrare pentru textul "Continuați în alt mod" */
     color: #333;
 }
+
 .DejaCont {
     margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
     /* ✨ SCHIMBARE: Centrare pentru textul "Aveți deja un cont?" */
-    text-align: center; 
-    color:#333;
+    text-align: center;
+    color: #333;
 }
+
 .DejaCont a {
     color: #007bff;
     text-decoration: none;
     margin-left: 5px;
 
 }
+
 .DejaCont a:hover {
     text-decoration: underline;
 }
@@ -147,25 +164,31 @@
 /* 10. RESPONSIVE */
 @media (max-width: 992px) {
     .page-wrapper {
-        flex-direction: column; 
+        flex-direction: column;
         justify-content: center;
         gap: 40px;
-        padding: 40px 20px; 
+        padding: 40px 20px;
     }
+
     .logo img {
         max-height: 150px;
     }
+
     .container {
-        max-width: 400px; 
-        width: 90%; 
+        max-width: 400px;
+        width: 90%;
         min-height: auto;
         padding: 30px 20px;
-        align-items: center; /* Centrare pe mobil */
+        align-items: center;
+        /* Centrare pe mobil */
         text-align: center;
     }
+
     .header {
-        text-align: center; /* Se asigură că rămâne centrat și pe mobil */
+        text-align: center;
+        /* Se asigură că rămâne centrat și pe mobil */
     }
+
     .header .text {
         text-align: center;
     }

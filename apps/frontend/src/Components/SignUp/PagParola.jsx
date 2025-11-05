@@ -76,7 +76,6 @@ const PagParola = ({ onNavigare }) => {
                     </div>
                     <button
                         className="next-step-button"
-                        // 👈 Aici este handler-ul de click care navighează
                         onClick={() => onNavigare('selectare-rol')}
                     >
                         Pasul următor
