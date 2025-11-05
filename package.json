@@ -15,5 +15,8 @@
 	"packageManager": "pnpm@10.17.1",
 	"devDependencies": {
 		"concurrently": "^8.2.0"
+	},
+	"dependencies": {
+		"react-icons": "^5.5.0"
 	}
 }
