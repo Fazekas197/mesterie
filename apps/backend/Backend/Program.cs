@@ -43,7 +43,6 @@ app.UseAuthorization();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapJudeteEndpoints();
 app.MapAuthEndpoints();
 
 app.Run();
