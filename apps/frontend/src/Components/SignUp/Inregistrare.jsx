@@ -9,24 +9,43 @@ const Inregistrare = ({ onNavigare }) => {
         dataNastere: '',
         telefon: ''
     });
+    // Păstrăm structura de erori pentru a semnaliza chenarul roșu
     const [errors, setErrors] = useState({});
 
-    // FUNCTIA MODIFICATA PENTRU A RESTRICȚIONA DOAR LA LITERE ȘI SPAȚII PENTRU numeComplet
+    // Utilitară pentru a obține data curentă în format YYYY-MM-DD
+    const getCurrentDate = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    // Funcția pentru a gestiona schimbările și a aplica restricțiile de caractere
     const handleChange = (e) => {
         const { id, value } = e.target;
 
         let newValue = value;
 
         if (id === 'numeComplet') {
-            // Regex care permite: litere (a-z, A-Z), spații (\s), și diacritice românești (Unicode range)
-            // [\u0102\u0103\u00C2\u00E2\u00CE\u00EE\u0218\u0219\u021A\u021B] acoperă ĂăÂâÎîȘșȚț
+            // Regex care permite: litere (a-z, A-Z), spații (\s), și diacritice românești
             const nameRegex = /^[a-zA-Z\s\u0102\u0103\u00C2\u00E2\u00CE\u00EE\u0218\u0219\u021A\u021B]*$/;
 
             if (!nameRegex.test(value) && value !== '') {
-                // Dacă valoarea introdusă nu corespunde regex-ului, NU se actualizează starea,
-                // prevenind astfel introducerea caracterelor interzise.
                 return;
             }
+        }
+
+
+        if (id === 'telefon') {
+            const phoneRegex = /^[0-9]*$/;
+
+            if (!phoneRegex.test(value)) {
+                return;
+            }
+
+            newValue = value.slice(0, 13);
         }
 
         // Actualizarea stării
@@ -34,32 +53,76 @@ const Inregistrare = ({ onNavigare }) => {
 
         // Curăță eroarea la tastare
         if (errors[id]) {
-            setErrors({ ...errors, [id]: false });
+            // Setăm eroarea la 'false' sau ștergem cheia, nu mai avem nevoie de text
+            setErrors(prevErrors => {
+                const updatedErrors = { ...prevErrors };
+                delete updatedErrors[id];
+                return updatedErrors;
+            });
         }
     };
 
-    // ... restul funcțiilor și JSX-ul nu sunt modificate
-
+    // Funcția de validare păstrează logica, dar stochează doar true/false (sau un string gol)
+    // pentru a declanșa chenarul roșu
     const validateForm = () => {
+        // Vom folosi un obiect unde cheia există dacă există o eroare
         const newErrors = {};
-        if (!formData.numeComplet.trim()) newErrors.numeComplet = true;
-        if (!formData.email.trim()) newErrors.email = true;
-        if (!formData.dataNastere) newErrors.dataNastere = true;
-        if (!formData.telefon.trim()) newErrors.telefon = true;
+        let isValid = true;
+
+        const minDate = new Date('1870-01-01');
+
+        // Validare Nume
+        if (!formData.numeComplet.trim()) {
+            newErrors.numeComplet = true; // Setează la true pentru a declanșa stilul
+            isValid = false;
+        }
+
+        // Validare Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email.trim()) {
+            newErrors.email = true;
+            isValid = false;
+        } else if (!emailRegex.test(formData.email)) {
+            newErrors.email = true;
+            isValid = false;
+        }
+
+        // Validare Data Nașterii
+        const today = getCurrentDate();
+        const dateOfBirth = new Date(formData.dataNastere);
+
+        if (!formData.dataNastere) {
+            newErrors.dataNastere = true;
+            isValid = false;
+        } else if (dateOfBirth > new Date(today) || dateOfBirth < minDate) {
+            // Verificare pentru data maximă (viitor) și minimă (1870)
+            newErrors.dataNastere = true;
+            isValid = false;
+        }
+
+        // Validare Telefon - Verificare lungime (min 7, max 10)
+        const phoneValue = formData.telefon.trim();
+        if (!phoneValue) {
+            newErrors.telefon = true;
+            isValid = false;
+        } else if (phoneValue.length < 7 || phoneValue.length > 10) {
+            newErrors.telefon = true;
+            isValid = false;
+        }
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return isValid;
     };
 
     const handleSubmit = () => {
         // 1. Verifică validarea
         if (validateForm()) {
             // 2. Navighează la Pagina Parola (cheia 'parola' definită în App.jsx)
-            onNavigare('parola'); // 👈 ACEASTA ESTE ACȚIUNEA DORITĂ
+            onNavigare('parola');
 
         } else {
-            // Dacă validarea eșuează, erorile roșii se vor afișa
-            console.log('Eroare: Formularul nu este completat.');
+            // Dacă validarea eșuează, chenarele roșii se vor afișa
+            console.log('Eroare: Formularul nu este completat corect.');
         }
     };
 
@@ -81,9 +144,10 @@ const Inregistrare = ({ onNavigare }) => {
 
                 {/* 2. Titlul într-un alt bloc (sau direct în container) */}
                 <h1 className="title-text-large">Înregistrare</h1>
+                {/* Afișează mesajul de eroare general - PĂSTRAT PENTRU A SEMNALA CĂ SUNT ERORI */}
                 {Object.keys(errors).length > 0 && (
                     <div className="error-message">
-                        Vă rugăm să completați toate câmpurile.
+                        Vă rugăm să corectați câmpurile semnalate.
                     </div>
                 )}
                 <div className="DejaCont">
@@ -98,11 +162,13 @@ const Inregistrare = ({ onNavigare }) => {
                         <input
                             type="text"
                             id="numeComplet"
-                            className={`text-input ${errors.numeComplet ? 'input-error' : ''}`} // Aplicare condițională
+                            // Aplica clasa input-error DACA exista o eroare specifica
+                            className={`text-input ${errors.numeComplet ? 'input-error' : ''}`}
                             placeholder="Nume Prenume"
                             value={formData.numeComplet} // Valoarea din stare
                             onChange={handleChange} // Handler la schimbare
                         />
+                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
 
                     {/* Câmpul 2: Adresă de e-mail */}
@@ -116,43 +182,46 @@ const Inregistrare = ({ onNavigare }) => {
                             value={formData.email}
                             onChange={handleChange}
                         />
+                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
+
+                    {/* Câmpul 3: Data Nașterii */}
                     <div className="input-field-group">
                         <div className="input-field-group">
                             <label htmlFor="dataNastere" className="input-label">Data nașterii</label>
                             <input
                                 type="date"
                                 id="dataNastere"
-                                // Aplică clasa de eroare dacă errors.dataNastere este true
+
+                                max={getCurrentDate()}
+
+                                min="1870-01-01"
                                 className={`text-input date-input ${errors.dataNastere ? 'input-error' : ''}`}
-                                // Valoarea din starea React
                                 value={formData.dataNastere}
-                                // Handler-ul care actualizează starea și curăță erorile
                                 onChange={handleChange}
                             />
+                            {/* MESAJUL DE EROARE ELIMINAT AICI */}
                         </div>
                         <label htmlFor="phone" className="input-label">Phone Number</label>
 
-                        {/* Aplicăm clasa condițional pe wrapper, nu pe input-ul din interior! */}
+                        {/* Câmpul 4: Telefon */}
                         <div className={`phone-input-wrapper ${errors.telefon ? 'input-error' : ''}`}>
                             <div className="country-selector">
-                                {/* 🇷🇴 Drapelul României ca emoji sau simbol custom */}
                                 <span role="img" aria-label="Romania flag">🇷🇴</span>
                                 <span>+40</span>
-                                {/* Săgeata în jos */}
-                                <span>&#9662;</span>
                             </div>
 
-                            {/* Conectăm input-ul la starea formularului */}
                             <input
                                 type="tel"
-                                id="telefon" // 👈 ID-ul din starea 'formData.telefon'
+                                id="telefon"
                                 className="phone-input-field"
-                                placeholder="000-000-000"
-                                value={formData.telefon} // 👈 Valoarea din stare
-                                onChange={handleChange}  // 👈 Handler-ul la schimbare
+                                placeholder="0000000000"
+                                value={formData.telefon}
+                                onChange={handleChange}
+                                maxLength={14}
                             />
                         </div>
+                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
                     <button className="next-step-button" onClick={handleSubmit}>
                         Pasul următor
