@@ -4,6 +4,7 @@ import SignUp from "./Components/SignUp/SignUp";
 import Inregistrare from "./Components/SignUp/Inregistrare";
 import PagParola from "./Components/SignUp/PagParola";
 import RoleSelection from "./Components/SignUp/RoleSelection";
+import Login from "./Components/SignUp/Login"
 
 function App() {
 	const [paginaActiva, setPaginaActiva] = useState("signup");
@@ -15,8 +16,8 @@ function App() {
 	return (
 		<div className="app-main-content">
 			{paginaActiva === "signup" && <SignUp onNavigare={navigeazaLa} />}
+			{paginaActiva === "login" && <Login onNavigare={navigeazaLa} />}
 
-			{/* Asigură-te că Inregistrare primește onNavigare pentru săgeata de întoarcere */}
 			{paginaActiva === "inregistrare" && (
 				<Inregistrare onNavigare={navigeazaLa} />
 			)}

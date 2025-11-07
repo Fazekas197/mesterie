@@ -41,7 +41,16 @@ const SignUp = ({ onNavigare }) => {
 
                 <div className="DejaCont">
                     Aveți deja un cont?
-                    <a href="https://www.google.com/">Autentificare</a>
+                    {/* CORECȚIE: Navigare la pagina de Login folosind onNavigare */}
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onNavigare('login');
+                        }}
+                    >
+                        Autentificare
+                    </a>
                 </div>
             </div>
         </div>

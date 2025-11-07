@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
-import logo from '../assets/LogoAlb.svg';
-import "./Login.css";
+import eyeOff from '../Assets/eye-off.svg';
+import eyeOn from '../Assets/eye-on.svg';
 
+import logo from '../Assets/LogoAlb.svg'; // Corectează calea la 'Assets' cu A mare
+import "./Login.css";
 // MODIFICARE NOUĂ: BAZĂ DE DATE FALSĂ (MOCK)
 // În mod normal, aceste date ar veni dintr-un API
 const usersDatabase = [
@@ -11,7 +12,8 @@ const usersDatabase = [
   { email: 'test@test.com', parola: '123456' }
 ];
 
-const Login = () => {
+// Componenta acceptă acum 'onNavigare'
+const Login = ({ onNavigare }) => {
   const [email, setEmail] = useState('');
   const [parola, setParola] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -44,22 +46,29 @@ const Login = () => {
     <div className="login-page-container">
 
       <div className="logo-container">
+        {/* EROARE CORECTATĂ: Asigură-te că variabila 'logo' este folosită corect */}
         <img src={logo} alt="Mesterie Logo" className="login-logo" />
       </div>
 
       <div className="login-form-container">
 
         <div className="login-card">
-          <button className="back-button">
-            <FaArrowLeft />
+          <button
+            className="back-button"
+            // Navigare înapoi la pagina de înregistrare
+            onClick={() => onNavigare('signup')}
+          >
           </button>
 
           <h2>Autentificare</h2>
           <p className="register-link">
-            Nu ai un cont? <a href="/register">Înregistrează-te</a>
+            Nu ai un cont?
+            {/* Navigare la pagina de Înregistrare */}
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigare('signup'); }}>
+              Înregistrează-te
+            </a>
           </p>
 
-          { }
           {error && (
             <p className="error-message">Datele introduse nu sunt corecte</p>
           )}
@@ -94,7 +103,12 @@ const Login = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="password-toggle-icon"
                 >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  {/* SCHIMBAREA CHEIE: Înlocuim iconițele React cu SVG-urile */}
+                  <img
+                    src={showPassword ? eyeOn : eyeOff}
+                    alt="Toggle Password Visibility"
+                    style={{ width: '24px', height: '24px', verticalAlign: 'middle', cursor: 'pointer' }}
+                  />
                 </span>
               </div>
             </div>
@@ -111,11 +125,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-//IMPORTANT:
-/*Pentru a testa:
-
-Test de succes: Folosește test@test.com și parola 123456. Bordura roșie ar trebui să dispară dacă a fost acolo.
-
-Test de eroare: Folosește test@test.com și parola greșită. Bordura roșie și mesajul vor apărea.*/
