@@ -2,7 +2,14 @@
 
 # Cuprins
 
-## 1. Inregistrare Utilizator
+-   [Înregistrare Utilizator](#inregistrare-utilizator)
+-   [Autentificare utilizator](#autentificare-utilizator)
+-   [Test token JWT](#test-token-jwt)
+-   [Obținere județe și specializări](#obținere-județe-și-specializări)
+
+---
+
+## Inregistrare Utilizator
 
 -   **Endpoint:** `/auth/register`
 -   **Metodă:** `POST`
@@ -21,11 +28,10 @@
 	"EsteMeserias": "bool",
 	"Telefon": "string",
 	"Data_Nasterii": "date (YYYY-MM-DD)",
-	"Desc": "string (opțional, necesar dacă EsteMeserias = true)",
+	"Desc": "string (opțional)",
 	"Experienta": "int (opțional)",
 	"Pret_start": "float (opțional)",
 	"Disponibilitate": "string (opțional)",
-	"Id_User": "int (ignoră la înregistrare)",
 	"Id_Judet": "int (opțional)",
 	"SpecializariId": "list<int> (opțional)"
 }
@@ -48,8 +54,7 @@
 	"Desc": "Instalator cu experiență în lucrări rezidențiale",
 	"Experienta": 8,
 	"Pret_start": 150.0,
-	"Disponibilitate": "Luni-Vineri, 09:00-18:00",
-	"Id_User": 0,
+	"Disponibilitate": "Ocupat",
 	"Id_Judet": 23,
 	"SpecializariId": [1, 3, 5]
 }
@@ -59,7 +64,7 @@
 
 -   **Status:** 200 OK
 
-## 2. Autentificare utilizator
+## Autentificare utilizator
 
 -   **Endpoint:** `/auth/login`
 -   **Metodă:** `POST`
@@ -97,5 +102,53 @@
 ```json
 {
 	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+## Test token JWT
+
+-   **Endpoint:** `/auth/test`
+-   **Metodă:** GET
+-   **Autentificare:** Da
+-   **Descriere:** Endpoint de test pentru a verifica dacă tokenul JWT este valid. Returnează mesajul `"Autorizat"` dacă tokenul este corect și utilizatorul este autentificat.
+
+---
+
+### 💻 Usage example
+
+#### Response
+
+-   **Status:** 200 OK
+-   **Mesaj:** "Autorizat"
+
+---
+
+## Obținere județe și specializări
+
+-   **Endpoint:** `auth/data`
+-   **Metodă:** GET
+-   **Autentificare:** Nu
+-   **Descriere:** Returnează lista completă de județe și specializări disponibile în sistem.
+
+### 💻 Usage example
+
+#### Response
+
+**Status:** 200 OK
+
+```json
+{
+	"judete": [
+		{ "id": 1, "name": "Alba" },
+		{ "id": 2, "name": "Arad" },
+		{ "id": 3, "name": "Argeș" }
+        ...
+	],
+	"specializari": [
+		{ "id": 1, "name": "Zidar" },
+		{ "id": 2, "name": "Dulgher" },
+		{ "id": 3, "name": "Constructor" }
+        ...
+	]
 }
 ```
