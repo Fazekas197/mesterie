@@ -10,13 +10,36 @@ const Inregistrare = ({ onNavigare }) => {
         telefon: ''
     });
     const [errors, setErrors] = useState({});
+
+    // FUNCTIA MODIFICATA PENTRU A RESTRICȚIONA DOAR LA LITERE ȘI SPAȚII PENTRU numeComplet
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
+        const { id, value } = e.target;
+
+        let newValue = value;
+
+        if (id === 'numeComplet') {
+            // Regex care permite: litere (a-z, A-Z), spații (\s), și diacritice românești (Unicode range)
+            // [\u0102\u0103\u00C2\u00E2\u00CE\u00EE\u0218\u0219\u021A\u021B] acoperă ĂăÂâÎîȘșȚț
+            const nameRegex = /^[a-zA-Z\s\u0102\u0103\u00C2\u00E2\u00CE\u00EE\u0218\u0219\u021A\u021B]*$/;
+
+            if (!nameRegex.test(value) && value !== '') {
+                // Dacă valoarea introdusă nu corespunde regex-ului, NU se actualizează starea,
+                // prevenind astfel introducerea caracterelor interzise.
+                return;
+            }
+        }
+
+        // Actualizarea stării
+        setFormData({ ...formData, [id]: newValue });
+
         // Curăță eroarea la tastare
-        if (errors[e.target.id]) {
-            setErrors({ ...errors, [e.target.id]: false });
+        if (errors[id]) {
+            setErrors({ ...errors, [id]: false });
         }
     };
+
+    // ... restul funcțiilor și JSX-ul nu sunt modificate
+
     const validateForm = () => {
         const newErrors = {};
         if (!formData.numeComplet.trim()) newErrors.numeComplet = true;
@@ -27,6 +50,7 @@ const Inregistrare = ({ onNavigare }) => {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
     const handleSubmit = () => {
         // 1. Verifică validarea
         if (validateForm()) {
@@ -35,10 +59,10 @@ const Inregistrare = ({ onNavigare }) => {
 
         } else {
             // Dacă validarea eșuează, erorile roșii se vor afișa
-            // (Acest else este în interiorul funcției validateForm, deci e deja gestionat)
             console.log('Eroare: Formularul nu este completat.');
         }
     };
+
     return (
         <div className="page-wrapper">
 
