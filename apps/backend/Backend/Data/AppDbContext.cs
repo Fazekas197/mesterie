@@ -1,4 +1,5 @@
 // Backend/Data/AppDbContext.cs
+using Backend.Exceptions;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -42,30 +43,23 @@ public class AppDbContext : DbContext
 
     private void ValidateEntities()
     {
-        // Validate Utilizator entities that are Added or Modified
         foreach (var entry in ChangeTracker.Entries<Utilizator>()
                      .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
         {
             var u = entry.Entity;
 
-            // Normalize/trim before validating
+            // --- Validate Nume ---
             var nume = u.Nume?.Trim();
-
-            // Required check + pattern match
             if (string.IsNullOrWhiteSpace(nume) || !NameRegex.IsMatch(nume))
-            {
-                // Throwing a ValidationException here; endpoints should catch and translate to 400.
-                throw new ValidationException("Nume may contain only letters, spaces, hyphens and apostrophes.");
-            }
+                throw new FieldValidationException("Nume",
+                    "Nume may contain only letters, spaces, hyphens and apostrophes.");
 
-            // Persist the normalized value back into the tracked entity
             u.Nume = nume!;
-            if (string.IsNullOrWhiteSpace(u.Telefon) || !Regex.IsMatch(u.Telefon, @"^\d{10}$"))
-            {
-                throw new ValidationException("Telefon must contain exactly 10 digits.");
-            }
-        }
 
+            // --- Validate Telefon ---
+            if (string.IsNullOrWhiteSpace(u.Telefon) || !Regex.IsMatch(u.Telefon, @"^\d{10}$"))
+                throw new FieldValidationException("Telefon", "Telefon must contain exactly 10 digits.");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
