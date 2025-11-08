@@ -1,6 +1,6 @@
 using Backend.Data;
 using Backend.DTOs;
-using Backend.Exceptions;               // ✅ add this
+using Backend.Exceptions;
 using Backend.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
@@ -79,7 +79,7 @@ public static class AuthEndpoints
             }
             catch (ValidationException vex)
             {
-                // ✅ Fallback for any generic validation issues
+                // Fallback for any generic validation issues
                 return Results.BadRequest(new
                 {
                     errors = new

@@ -59,6 +59,14 @@ public class AppDbContext : DbContext
             // --- Validate Telefon ---
             if (string.IsNullOrWhiteSpace(u.Telefon) || !Regex.IsMatch(u.Telefon, @"^\d{10}$"))
                 throw new FieldValidationException("Telefon", "Telefon must contain exactly 10 digits.");
+
+            // --- Validate Data_Nasterii ---
+            if (u.Data_Nasterii == null)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate is required.");
+
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            if (u.Data_Nasterii > today)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate cannot be in the future.");
         }
     }
 
