@@ -198,7 +198,6 @@ const Inregistrare = ({ onNavigare }) => {
                                 max={getCurrentDate()}
 
                                 min="1920-01-01"
-                                // CORECTAT: Folosim backticks (``) pentru template literal
                                 className={`text-input date-input ${errors.dataNastere ? 'input-error' : ''}`}
                                 value={formData.dataNastere}
                                 onChange={handleChange}
