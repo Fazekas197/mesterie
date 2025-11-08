@@ -195,7 +195,7 @@ const Inregistrare = ({ onNavigare }) => {
 
                                 max={getCurrentDate()}
 
-                                min="1870-01-01"
+                                min="1920-01-01"
                                 className={`text-input date-input ${errors.dataNastere ? 'input-error' : ''}`}
                                 value={formData.dataNastere}
                                 onChange={handleChange}
