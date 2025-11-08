@@ -13,6 +13,7 @@ public class Utilizator
     [Required]
     public int Id { get; set; }
     [Required]
+    [RegularExpression(@"^[\p{L}\s]+$", ErrorMessage = "Only letters and spaces are allowed.")]
     public string Nume { get; set; } = null!;
     [Required]
     public string Email { get; set; } = null!;
@@ -22,7 +23,10 @@ public class Utilizator
     [Required]
     public bool EsteMeserias { get; set; } = false;
     [Required]
+    [StringLength(10, MinimumLength = 10, ErrorMessage = "Telefon must be exactly 10 characters long.")]
+    [RegularExpression(@"^\d{10}$", ErrorMessage = "Telefon must contain exactly 10 digits.")]
     public string Telefon { get; set; } = null!;
+
     [Required]
     public DateOnly? Data_Nasterii { get; set; } = null!;
     [Required]

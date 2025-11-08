@@ -11,7 +11,7 @@ public record RegisterDTO(
 
     string Desc,
     int Experienta,
-    float Pret_start,
+    decimal Pret_start,
     string Disponibilitate,
     int Id_User,
     int Id_Judet,
