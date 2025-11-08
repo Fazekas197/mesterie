@@ -60,7 +60,12 @@ public class AppDbContext : DbContext
 
             // Persist the normalized value back into the tracked entity
             u.Nume = nume!;
+            if (string.IsNullOrWhiteSpace(u.Telefon) || !Regex.IsMatch(u.Telefon, @"^\d{10}$"))
+            {
+                throw new ValidationException("Telefon must contain exactly 10 digits.");
+            }
         }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

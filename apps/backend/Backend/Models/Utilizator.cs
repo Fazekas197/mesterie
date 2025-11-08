@@ -23,9 +23,10 @@ public class Utilizator
     [Required]
     public bool EsteMeserias { get; set; } = false;
     [Required]
-    [MaxLength(10)]
-    [MinLength(10)]
+    [StringLength(10, MinimumLength = 10, ErrorMessage = "Telefon must be exactly 10 characters long.")]
+    [RegularExpression(@"^\d{10}$", ErrorMessage = "Telefon must contain exactly 10 digits.")]
     public string Telefon { get; set; } = null!;
+
     [Required]
     public DateOnly? Data_Nasterii { get; set; } = null!;
     [Required]
