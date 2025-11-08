@@ -74,7 +74,17 @@ public class AppDbContext : DbContext
         // Make Id an alternate (unique) principal key so single-col FKs can target it
         modelBuilder.Entity<Meserias>()
             .HasAlternateKey(m => m.Id);
+        // Inside AppDbContext.OnModelCreating()
+        modelBuilder.Entity<Meserias>()
+            .HasKey(m => new { m.Id, m.Id_user });
 
+        modelBuilder.Entity<Meserias>()
+            .HasAlternateKey(m => m.Id);
+
+        // ✅ Limit decimals on Pret_start
+        modelBuilder.Entity<Meserias>()
+            .Property(m => m.Pret_start)
+            .HasPrecision(10, 2);
         // Ensure SpecializareMeserias composite PK
         modelBuilder.Entity<SpecializareMeserias>()
             .HasKey(s => new { s.Id_meserias, s.Id_specializare });

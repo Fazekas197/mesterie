@@ -23,7 +23,8 @@ public class Meserias
     [Required]
     public int Experienta { get; set; }
     [Required]
-    public float Pret_start { get; set; }
+    [Range(0, 9999.99)]
+    public decimal Pret_start { get; set; }
     [Required]
     public string Disponibilitate { get; set; } = null!;
     public Utilizator Utilizator { get; set; } = null!;

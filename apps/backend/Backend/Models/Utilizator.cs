@@ -23,6 +23,8 @@ public class Utilizator
     [Required]
     public bool EsteMeserias { get; set; } = false;
     [Required]
+    [MaxLength(10)]
+    [MinLength(10)]
     public string Telefon { get; set; } = null!;
     [Required]
     public DateOnly? Data_Nasterii { get; set; } = null!;
