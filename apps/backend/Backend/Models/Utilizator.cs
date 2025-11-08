@@ -13,6 +13,7 @@ public class Utilizator
     [Required]
     public int Id { get; set; }
     [Required]
+    [RegularExpression(@"^[\p{L}\s]+$", ErrorMessage = "Only letters and spaces are allowed.")]
     public string Nume { get; set; } = null!;
     [Required]
     public string Email { get; set; } = null!;

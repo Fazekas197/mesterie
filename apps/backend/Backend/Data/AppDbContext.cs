@@ -1,5 +1,9 @@
+// Backend/Data/AppDbContext.cs
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Backend.Data;
 
@@ -17,9 +21,48 @@ public class AppDbContext : DbContext
     public DbSet<SpecializareMeserias> SpecializariMeseriasi { get; set; } = null!;
     public DbSet<Favorit> Favorite { get; set; } = null!;
     public DbSet<Oferta> Oferte { get; set; } = null!;
-    public DbSet<Review> Reviews {get;set;} = null!;
-    public DbSet<Aplicare> Aplicari {get;set;} = null!;
-    
+    public DbSet<Review> Reviews { get; set; } = null!;
+    public DbSet<Aplicare> Aplicari { get; set; } = null!;
+
+    // Allowed characters: Unicode letters, spaces, hyphen and apostrophe.
+    // Adjust regex if you want ASCII-only (e.g. ^[A-Za-z\s'-]+$).
+    private static readonly Regex NameRegex = new(@"^[\p{L}\s'-]+$", RegexOptions.Compiled);
+
+    public override int SaveChanges()
+    {
+        ValidateEntities();
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        ValidateEntities();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void ValidateEntities()
+    {
+        // Validate Utilizator entities that are Added or Modified
+        foreach (var entry in ChangeTracker.Entries<Utilizator>()
+                     .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
+        {
+            var u = entry.Entity;
+
+            // Normalize/trim before validating
+            var nume = u.Nume?.Trim();
+
+            // Required check + pattern match
+            if (string.IsNullOrWhiteSpace(nume) || !NameRegex.IsMatch(nume))
+            {
+                // Throwing a ValidationException here; endpoints should catch and translate to 400.
+                throw new ValidationException("Nume may contain only letters, spaces, hyphens and apostrophes.");
+            }
+
+            // Persist the normalized value back into the tracked entity
+            u.Nume = nume!;
+        }
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -68,42 +111,39 @@ public class AppDbContext : DbContext
             .HasPrincipalKey(m => m.Id) // FK points to alternate key
             .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Review>()
-    .HasKey(r => r.Id);
+        modelBuilder.Entity<Review>()
+            .HasKey(r => r.Id);
 
-modelBuilder.Entity<Review>()
-    .HasOne(r => r.Utilizator)
-    .WithMany() // optionally: .WithMany(u => u.Reviews)
-    .HasForeignKey(r => r.Id_User)
-    .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Utilizator)
+            .WithMany() // optionally: .WithMany(u => u.Reviews)
+            .HasForeignKey(r => r.Id_User)
+            .OnDelete(DeleteBehavior.Restrict);
 
-modelBuilder.Entity<Review>()
-    .HasOne(r => r.Meserias)
-    .WithMany() // optionally: .WithMany(m => m.Reviews)
-    .HasForeignKey(r => r.Id_Meserias)
-    .HasPrincipalKey(m => m.Id) // references Meserias.Id (alternate key)
-    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Reviews)
+            .HasForeignKey(r => r.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references Meserias.Id (alternate key)
+            .OnDelete(DeleteBehavior.Cascade);
 
-       // -------------------------------
-// Aplicare
-// -------------------------------
-modelBuilder.Entity<Aplicare>()
-    .HasKey(a => a.Id);
+        // -------------------------------
+        // Aplicare
+        // -------------------------------
+        modelBuilder.Entity<Aplicare>()
+            .HasKey(a => a.Id);
 
-modelBuilder.Entity<Aplicare>()
-    .HasOne(a => a.Oferta)
-    .WithMany() // optionally: .WithMany(o => o.Aplicari)
-    .HasForeignKey(a => a.Id_Oferta)
-    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Oferta)
+            .WithMany() // optionally: .WithMany(o => o.Aplicari)
+            .HasForeignKey(a => a.Id_Oferta)
+            .OnDelete(DeleteBehavior.Cascade);
 
-modelBuilder.Entity<Aplicare>()
-    .HasOne(a => a.Meserias)
-    .WithMany() // optionally: .WithMany(m => m.Aplicari)
-    .HasForeignKey(a => a.Id_Meserias)
-    .HasPrincipalKey(m => m.Id) // references alternate key in Meserias
-    .OnDelete(DeleteBehavior.Restrict);
-
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Aplicari)
+            .HasForeignKey(a => a.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references alternate key in Meserias
+            .OnDelete(DeleteBehavior.Restrict);
     }
-
- 
 }

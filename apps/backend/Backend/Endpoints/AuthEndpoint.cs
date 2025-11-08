@@ -1,5 +1,6 @@
 using System.Reflection.Metadata.Ecma335;
 using Backend.Data;
+using System.ComponentModel.DataAnnotations;
 using Backend.DTOs;
 using Backend.Models;
 using BCrypt.Net;
@@ -23,43 +24,68 @@ public static class AuthEndpoints
 
         group.MapPost("/register", async (AppDbContext db, RegisterDTO user) =>
         {
-            var createdUser = new Utilizator
+            try
             {
-                Nume = user.Nume,
-                Email = user.Email,
-                Telefon = user.Telefon,
-                EsteMeserias = user.EsteMeserias,
-                Data_Nasterii = user.Data_Nasterii,
-                Parola_Hash = BCrypt.Net.BCrypt.HashPassword(user.Parola)
-            };
-
-            await db.Utilizatori.AddAsync(createdUser);
-            await db.SaveChangesAsync();
-            if (user.EsteMeserias == true)
-            {
-                var createdMeserias = new Meserias
+                var createdUser = new Utilizator
                 {
-                    Desc = user.Desc,
-                    Experienta = user.Experienta,
-                    Pret_start = user.Pret_start,
-                    Disponibilitate = user.Disponibilitate,
-                    Id_user = createdUser.Id,
-                    Id_Judet = user.Id_Judet,
+                    Nume = user.Nume,                                 // validated in SaveChanges
+                    Email = user.Email.Trim().ToLowerInvariant(),
+                    Telefon = user.Telefon,
+                    EsteMeserias = user.EsteMeserias,
+                    Data_Nasterii = user.Data_Nasterii,
+                    Parola_Hash = BCrypt.Net.BCrypt.HashPassword(user.Parola),
+                    Created_at = DateOnly.FromDateTime(DateTime.UtcNow)
                 };
-                await db.Meseriasi.AddAsync(createdMeserias);
-                await db.SaveChangesAsync();
-                for (int i = 0; i < user.SpecializariId.Count; i++)
-                {
-                    var specializareId = user.SpecializariId[i];
 
-                    var link = new SpecializareMeserias
+                await db.Utilizatori.AddAsync(createdUser);
+                await db.SaveChangesAsync(); // <-- may throw ValidationException
+
+                if (user.EsteMeserias == true)
+                {
+                    var createdMeserias = new Meserias
                     {
-                        Id_meserias = createdMeserias.Id,
-                        Id_specializare = specializareId
+                        Desc = user.Desc,
+                        Experienta = user.Experienta,
+                        Pret_start = user.Pret_start,
+                        Disponibilitate = user.Disponibilitate,
+                        Id_user = createdUser.Id,
+                        Id_Judet = user.Id_Judet,
                     };
-                    await db.SpecializariMeseriasi.AddAsync(link);
+                    await db.Meseriasi.AddAsync(createdMeserias);
+                    await db.SaveChangesAsync();
+
+                    foreach (var specializareId in user.SpecializariId)
+                    {
+                        var link = new SpecializareMeserias
+                        {
+                            Id_meserias = createdMeserias.Id,
+                            Id_specializare = specializareId
+                        };
+                        await db.SpecializariMeseriasi.AddAsync(link);
+                    }
+                    await db.SaveChangesAsync();
                 }
-                await db.SaveChangesAsync();
+
+                return Results.Created($"/auth/{createdUser.Id}", new { id = createdUser.Id });
+            }
+            catch (ValidationException vex)
+            {
+                // Comes from AppDbContext.ValidateEntities()
+                return Results.BadRequest(new
+                {
+                    errors = new
+                    {
+                        Nume = new[] { vex.Message }
+                    }
+                });
+            }
+            catch (DbUpdateException dbex)
+            {
+                // Optional: handle unique email or other DB issues gracefully
+                return Results.Problem(
+                    title: "Database error",
+                    detail: dbex.InnerException?.Message ?? dbex.Message,
+                    statusCode: 500);
             }
         });
         group.MapPost("/login", async (AppDbContext db, LoginDTO login) =>
