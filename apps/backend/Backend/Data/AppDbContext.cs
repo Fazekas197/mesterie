@@ -65,6 +65,11 @@ public class AppDbContext : DbContext
                 throw new FieldValidationException("Data_Nasterii", "Birthdate is required.");
 
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            var minDate = new DateOnly(1925, 1, 1);
+
+            if (u.Data_Nasterii < minDate)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate cannot be earlier than 1925.");
+
             if (u.Data_Nasterii > today)
                 throw new FieldValidationException("Data_Nasterii", "Birthdate cannot be in the future.");
         }
