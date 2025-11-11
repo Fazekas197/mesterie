@@ -44,5 +44,5 @@ app.UseAuthorization();
 app.MapGet("/", () => "Hello World!");
 
 app.MapAuthEndpoints();
-
+app.MapFavEndpoints();
 app.Run();
