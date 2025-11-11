@@ -2,290 +2,287 @@
 
 /* Wrapper pentru logo + container */
 .login-page-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: left;
-  height: 100vh;
-  padding: 20px 80px;
-  background: linear-gradient(to bottom, #001f6b, #007bff);
-  box-sizing: border-box;
-  width: 100%;
-  height: 100vh;
-  gap: 80px;
-  /* Spațiu între logo și formular */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+	display: flex;
+	justify-content: space-evenly;
+	height: 100vh;
+	padding: 20px 80px;
+	background: linear-gradient(to bottom, #001f6b, #007bff);
+	box-sizing: border-box;
+	width: 100vw;
+	height: 100vh;
+	gap: 80px;
+	/* Spațiu între logo și formular */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /* === 2. COLOANA STÂNGA (Logo) === */
 .logo-container {
-  /* Logo-ul preia stilul de pe SignUp */
-  width: auto;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  flex-shrink: 0;
+	/* Logo-ul preia stilul de pe SignUp */
+	width: auto;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	flex-shrink: 0;
 }
 
 .login-logo {
-  /* Numele clasei este diferit (login-logo vs img), dar funcționalitatea e aceeași */
-  max-height: 460px;
-  width: auto;
-  object-fit: contain;
+	/* Numele clasei este diferit (login-logo vs img), dar funcționalitatea e aceeași */
+	max-height: 460px;
+	width: auto;
+	object-fit: contain;
 }
 
 /* === 3. COLOANA DREAPTĂ (Formular) === */
 .login-form-container {
-  /* Containerul din dreapta va avea aceleași proprietăți de layout */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  /* Aliniere sus */
-  align-items: center;
-  padding: 0;
-  box-sizing: border-box;
+	/* Containerul din dreapta va avea aceleași proprietăți de layout */
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	/* Aliniere sus */
+	align-items: center;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 /* Cardul alb de login (Conținutul) */
 .login-card {
-  /* Preia stilul exact al containerului din SignUp */
-  background: #EFEFF0;
-  width: 100%;
-  max-width: 430px;
-  /* Lățimea din SignUp */
-  min-height: 530px;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  max-height: 100%;
+	/* Preia stilul exact al containerului din SignUp */
+	background: #efeff0;
+	width: 100%;
+	max-width: 430px;
+	/* Lățimea din SignUp */
+	min-height: 530px;
+	height: auto;
+	border-radius: 16px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+	max-height: 100%;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
 
-  padding: 40px;
-  box-sizing: border-box;
-  text-align: left;
-  position: relative;
-  /* Pentru a poziționa butonul înapoi */
+	padding: 40px;
+	box-sizing: border-box;
+	text-align: left;
+	position: relative;
+	/* Pentru a poziționa butonul înapoi */
 }
 
 /* === Stiluri interne ale Formularului (Ajustări pentru a arăta ca în SignUp) === */
 
 /* Săgeata înapoi (back-button) */
 .back-button {
-  background: none;
-  border: none;
-  font-size: 28px;
-  /* Mărit pentru a se potrivi cu SignUp.css (.back-arrow-top) */
-  font-weight: bold;
-  cursor: pointer;
-  color: #333;
-  position: initial;
-  /* Anulăm absolute positioning */
-  align-self: flex-start;
-  /* Aliniere la stânga cardului */
-  margin-bottom: 20px;
-  /* Adăugăm spațiu sub săgeată */
-  transition: color 0.2s;
+	background: none;
+	border: none;
+	font-size: 28px;
+	/* Mărit pentru a se potrivi cu SignUp.css (.back-arrow-top) */
+	font-weight: bold;
+	cursor: pointer;
+	color: #333;
+	position: initial;
+	/* Anulăm absolute positioning */
+	align-self: flex-start;
+	/* Aliniere la stânga cardului */
+	margin-bottom: 20px;
+	/* Adăugăm spațiu sub săgeată */
+	transition: color 0.2s;
 }
 
 .back-button:hover {
-  color: #007bff;
+	color: #007bff;
 }
 
 .login-card h2 {
-  /* Stil pentru titlul "Autentificare" (similar cu title-text-large din Înregistrare) */
-  font-size: 28px;
-  font-weight: 700;
-  color: #333;
-  margin: 0 0 5px 0;
+	/* Stil pentru titlul "Autentificare" (similar cu title-text-large din Înregistrare) */
+	font-size: 28px;
+	font-weight: 700;
+	color: #333;
+	margin: 0 0 5px 0;
 }
 
 .register-link {
-  /* Stil pentru "Nu ai un cont? Înregistrează-te" (similar cu DejaCont) */
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  text-align: left;
-  /* Rămâne left în login-card */
-  color: #333;
-  font-size: 16px;
+	/* Stil pentru "Nu ai un cont? Înregistrează-te" (similar cu DejaCont) */
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 100%;
+	text-align: left;
+	/* Rămâne left în login-card */
+	color: #333;
+	font-size: 16px;
 }
 
 .register-link a {
-  color: #007bff;
-  text-decoration: none;
-  margin-left: 5px;
-  font-weight: 500;
+	color: #007bff;
+	text-decoration: none;
+	margin-left: 5px;
+	font-weight: 500;
 }
 
 .register-link a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .form-group {
-  /* Stilul grupului de input-uri */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
+	/* Stilul grupului de input-uri */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 20px;
 }
 
 .form-group label {
-  /* Stilul etichetei (input-label) */
-  font-size: 14px;
-  color: #6a6a6a;
-  font-weight: 500;
-  align-self: flex-start;
-  margin-bottom: 0;
+	/* Stilul etichetei (input-label) */
+	font-size: 14px;
+	color: #6a6a6a;
+	font-weight: 500;
+	align-self: flex-start;
+	margin-bottom: 0;
 }
 
 /* Modificăm input-urile normale pentru a se potrivi stilului din Inregistrare (.text-input) */
 .form-group input {
-  width: 100%;
-  padding: 15px 20px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-sizing: border-box;
-  outline: none;
-  transition: box-shadow 0.2s, border-color 0.2s;
+	width: 100%;
+	padding: 15px 20px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	background-color: #f0f0f0;
+	border-radius: 8px;
+	box-sizing: border-box;
+	outline: none;
+	transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .form-group input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+	border-color: #007bff;
+	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
 }
 
 /* === Stilul Parolă Uniformizat (preluat din Inregistrare/PagParola) === */
 .password-wrapper {
-  /* Wrapper-ul primește stilul chenarului */
-  display: flex;
-  align-items: center;
-  width: 100%;
+	/* Wrapper-ul primește stilul chenarului */
+	display: flex;
+	align-items: center;
+	width: 100%;
 
-  padding: 15px 20px;
-  border: 1px solid #ccc;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-sizing: border-box;
-  position: relative;
-  transition: border-color 0.2s ease, box-shadow 0.2s;
+	padding: 15px 20px;
+	border: 1px solid #ccc;
+	background-color: #f0f0f0;
+	border-radius: 8px;
+	box-sizing: border-box;
+	position: relative;
+	transition: border-color 0.2s ease, box-shadow 0.2s;
 }
 
 .password-wrapper:focus-within {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+	border-color: #007bff;
+	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
 }
 
 .password-wrapper input {
-  /* Input-ul din interior își pierde chenarul și padding-ul intern */
-  flex-grow: 1;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
+	/* Input-ul din interior își pierde chenarul și padding-ul intern */
+	flex-grow: 1;
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
 
-  background: transparent;
-  padding: 0;
-  width: 100%;
-  font-size: 16px;
-  box-sizing: border-box;
-  margin-right: 10px;
+	background: transparent;
+	padding: 0;
+	width: 100%;
+	font-size: 16px;
+	box-sizing: border-box;
+	margin-right: 10px;
 }
 
 .password-toggle-icon {
-  cursor: pointer;
-  color: #6a6a6a;
-  display: flex;
-  align-items: center;
+	cursor: pointer;
+	color: #6a6a6a;
+	display: flex;
+	align-items: center;
 }
 
 /* === Sfârșit Stil Parolă Uniformizat === */
 
 .login-button {
-  /* Stilul butonului Pasul Următor din Înregistrare */
-  width: 100%;
-  padding: 15px;
+	/* Stilul butonului Pasul Următor din Înregistrare */
+	width: 100%;
+	padding: 15px;
 
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 8px;
 
-  font-size: 18px;
-  font-weight: 600;
+	font-size: 18px;
+	font-weight: 600;
 
-  cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s;
+	cursor: pointer;
+	transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .login-button:hover {
-  background-color: #0069d9;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+	background-color: #0069d9;
+	box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
 }
 
 .error-message {
-  color: #e53e3e;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: left;
-  margin-bottom: 15px;
+	color: #e53e3e;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: left;
+	margin-bottom: 15px;
 }
 
 .form-group input.input-error,
 .password-wrapper.input-error {
-  border-color: #e53e3e !important;
-  border-width: 1px;
+	border-color: #e53e3e !important;
+	border-width: 1px;
 }
 
 /* === Responsive Mobil (Uniformizare cu SignUp) === */
 @media (max-width: 992px) {
-  .login-page-container {
-    flex-direction: column;
-    justify-content: flex-start;
-    /* Aliniere sus pe mobil */
-    align-items: center;
-    gap: 40px;
-    padding: 40px 20px;
-    height: auto;
-    min-height: 100vh;
-  }
+	.login-page-container {
+		flex-direction: column;
+		justify-content: flex-start;
+		/* Aliniere sus pe mobil */
+		align-items: center;
+		gap: 40px;
+		padding: 40px 20px;
+		height: auto;
+		min-height: 100vh;
+	}
 
-  .logo-container {
-    width: 100%;
-    height: auto;
-  }
+	.logo-container {
+		width: 100%;
+		height: auto;
+	}
 
-  .login-logo {
-    max-height: 150px;
-  }
+	.login-logo {
+		max-height: 150px;
+	}
 
-  .login-form-container {
-    width: 100%;
-    height: auto;
-  }
+	.login-form-container {
+		width: 100%;
+		height: auto;
+	}
 
-  .login-card {
-    max-width: 400px;
-    width: 100%;
-    min-height: auto;
-    padding: 30px 20px;
-  }
+	.login-card {
+		max-width: 400px;
+		width: 100%;
+		min-height: auto;
+		padding: 30px 20px;
+	}
 
-  .back-button {
-    /* Rămâne la stânga pe mobil */
-    align-self: flex-start;
-  }
+	.back-button {
+		/* Rămâne la stânga pe mobil */
+		align-self: flex-start;
+	}
 
-  .login-card h2 {
-    font-size: 24px;
-  }
+	.login-card h2 {
+		font-size: 24px;
+	}
 }
