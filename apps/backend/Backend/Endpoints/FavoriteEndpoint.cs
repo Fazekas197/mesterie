@@ -40,5 +40,28 @@ public static class FavoriteEndpoint
 
             return Results.Created($"/favorite/{favorit.Id}", favorit);
         });
+        group.MapDelete("/{id_meserias}", async (HttpContext http, AppDbContext db, int id_meserias) =>
+        {
+            var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                ?? http.User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (userIdClaim == null)
+                return Results.Json(new { message = "User ID not found in token." }, statusCode: 401);
+
+            int userId = int.Parse(userIdClaim);
+
+            bool exists = await db.Favorite.AnyAsync(f =>
+                f.Id_user == userId && f.Id_meserias == id_meserias);
+            var favorit = await db.Favorite.FirstOrDefaultAsync(f =>
+                f.Id_user == userId && f.Id_meserias == id_meserias);
+            if (exists)
+            {
+                db.Favorite.Remove(favorit);
+                await db.SaveChangesAsync();
+            }
+            else
+                return Results.NotFound(new { message = "Favorite not found." });
+            return Results.NoContent();
+        });
     }
 }
