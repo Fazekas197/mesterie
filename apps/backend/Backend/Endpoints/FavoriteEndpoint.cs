@@ -40,6 +40,7 @@ public static class FavoriteEndpoint
 
             return Results.Created($"/favorite/{favorit.Id}", favorit);
         });
+
         group.MapDelete("/{id_meserias}", async (HttpContext http, AppDbContext db, int id_meserias) =>
         {
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
@@ -62,5 +63,25 @@ public static class FavoriteEndpoint
                 return Results.NotFound(new { message = "Favorite not found." });
             return Results.NoContent();
         });
+
+        group.MapGet("/", async (ClaimsPrincipal user, AppDbContext db) =>
+        {
+            var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                ?? user.FindFirst(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Results.Unauthorized();
+
+            if (!int.TryParse(userIdClaim, out int userId))
+                return Results.BadRequest(new { message = "Invalid user id in token." });
+
+            var favorites = await db.Favorite
+                .Where(f => f.Id_user == userId)
+                .ToListAsync();
+
+            return Results.Ok(favorites);
+        });
+
+
     }
 }
