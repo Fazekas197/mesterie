@@ -12,7 +12,7 @@ public static class FavoriteEndpoint
     {
         var group = app.MapGroup("/favorite")
             .RequireAuthorization();
-
+        //Adaugare la favorite
         group.MapPost("/{id_meserias}", async (HttpContext http, AppDbContext db, int id_meserias) =>
         {
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
@@ -40,7 +40,7 @@ public static class FavoriteEndpoint
 
             return Results.Created($"/favorite/{favorit.Id}", favorit);
         });
-
+        //Stergere de la favorite 
         group.MapDelete("/{id_meserias}", async (HttpContext http, AppDbContext db, int id_meserias) =>
         {
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
@@ -63,7 +63,7 @@ public static class FavoriteEndpoint
                 return Results.NotFound(new { message = "Favorite not found." });
             return Results.NoContent();
         });
-
+        //Vizualizare toti meseriasii favoriti pentru un user
         group.MapGet("/", async (ClaimsPrincipal user, AppDbContext db) =>
         {
             var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
