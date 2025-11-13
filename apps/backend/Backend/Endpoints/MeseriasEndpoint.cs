@@ -9,8 +9,6 @@ public static class MeseriasEndpoint
     public static void MapMeseriasEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/meseriasi");
-
-        // 🔹 GET ALL MESERIASI
         group.MapGet("/", async (AppDbContext db) =>
         {
             var meseriasi = await db.Meseriasi
