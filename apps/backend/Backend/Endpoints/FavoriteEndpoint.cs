@@ -1,7 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Endpoints;
@@ -50,11 +50,10 @@ public static class FavoriteEndpoint
 
             int userId = int.Parse(userIdClaim);
 
-            bool exists = await db.Favorite.AnyAsync(f =>
-                f.Id_user == userId && f.Id_meserias == id_meserias);
+
             var favorit = await db.Favorite.FirstOrDefaultAsync(f =>
                 f.Id_user == userId && f.Id_meserias == id_meserias);
-            if (exists)
+            if (favorit != null)
             {
                 db.Favorite.Remove(favorit);
                 await db.SaveChangesAsync();
