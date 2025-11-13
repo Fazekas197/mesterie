@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
+// Presupunem că aceste importuri sunt funcționale în mediul dumneavoastră
 import './Inregistrare.css';
 import LogoAlb from '../Assets/LogoAlb.svg';
-import React, { useState } from 'react';
 
 const Inregistrare = ({ onNavigare }) => {
     const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const Inregistrare = ({ onNavigare }) => {
 
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
+        // CORECTAT: Folosim backticks (``) pentru template literal
         return `${year}-${month}-${day}`;
     };
 
@@ -45,7 +47,8 @@ const Inregistrare = ({ onNavigare }) => {
                 return;
             }
 
-            newValue = value.slice(0, 13);
+            // Limităm la 10 cifre pentru a corespunde validării (7-10)
+            newValue = value.slice(0, 10);
         }
 
         // Actualizarea stării
@@ -62,8 +65,7 @@ const Inregistrare = ({ onNavigare }) => {
         }
     };
 
-    // Funcția de validare păstrează logica, dar stochează doar true/false (sau un string gol)
-    // pentru a declanșa chenarul roșu
+    // Funcția de validare
     const validateForm = () => {
         // Vom folosi un obiect unde cheia există dacă există o eroare
         const newErrors = {};
@@ -152,7 +154,8 @@ const Inregistrare = ({ onNavigare }) => {
                 )}
                 <div className="DejaCont">
                     Aveți deja un cont?
-                    <a href="https://www.google.com/">Autentificare</a>
+                    {/* A nu se folosi link către Google în aplicațiile reale */}
+                    <a href="#" onClick={(e) => { e.preventDefault(); onNavigare('login'); }}>Autentificare</a>
                 </div>
                 <div className="form-content">
 
@@ -162,13 +165,12 @@ const Inregistrare = ({ onNavigare }) => {
                         <input
                             type="text"
                             id="numeComplet"
-                            // Aplica clasa input-error DACA exista o eroare specifica
+                            // CORECTAT: Folosim backticks (``) pentru template literal
                             className={`text-input ${errors.numeComplet ? 'input-error' : ''}`}
                             placeholder="Nume Prenume"
                             value={formData.numeComplet} // Valoarea din stare
                             onChange={handleChange} // Handler la schimbare
                         />
-                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
 
                     {/* Câmpul 2: Adresă de e-mail */}
@@ -177,12 +179,12 @@ const Inregistrare = ({ onNavigare }) => {
                         <input
                             type="email"
                             id="email"
+                            // CORECTAT: Folosim backticks (``) pentru template literal
                             className={`text-input ${errors.email ? 'input-error' : ''}`}
                             placeholder="numeprenume@gmail.com"
                             value={formData.email}
                             onChange={handleChange}
                         />
-                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
 
                     {/* Câmpul 3: Data Nașterii */}
@@ -200,11 +202,11 @@ const Inregistrare = ({ onNavigare }) => {
                                 value={formData.dataNastere}
                                 onChange={handleChange}
                             />
-                            {/* MESAJUL DE EROARE ELIMINAT AICI */}
                         </div>
-                        <label htmlFor="phone" className="input-label">Phone Number</label>
+                        <label htmlFor="telefon" className="input-label">Număr de telefon</label>
 
                         {/* Câmpul 4: Telefon */}
+                        {/* CORECTAT: Folosim backticks (``) pentru template literal */}
                         <div className={`phone-input-wrapper ${errors.telefon ? 'input-error' : ''}`}>
                             <div className="country-selector">
                                 <span role="img" aria-label="Romania flag">🇷🇴</span>
@@ -218,10 +220,10 @@ const Inregistrare = ({ onNavigare }) => {
                                 placeholder="0000000000"
                                 value={formData.telefon}
                                 onChange={handleChange}
-                                maxLength={14}
+                                // Setează max la 10 pentru a corespunde validării
+                                maxLength={10}
                             />
                         </div>
-                        {/* MESAJUL DE EROARE ELIMINAT AICI */}
                     </div>
                     <button className="next-step-button" onClick={handleSubmit}>
                         Pasul următor
@@ -234,3 +236,4 @@ const Inregistrare = ({ onNavigare }) => {
 }
 
 export default Inregistrare;
+

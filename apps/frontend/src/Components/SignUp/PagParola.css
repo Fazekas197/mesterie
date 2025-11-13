@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    
+
     padding: 15px 20px;
     border: 1px solid #ccc;
     background-color: #f0f0f0;
@@ -14,12 +14,12 @@
 /* Input-ul din interiorul wrapper-ului */
 .password-input-wrapper .text-input {
     flex-grow: 1;
-    
+
     /* ✨ SOLUȚIA: Elimină orice formă de chenar intern */
-    border: none !important; 
+    border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    
+
     background: transparent;
     padding: 0;
     font-size: 16px;
@@ -30,8 +30,10 @@
 .password-toggle {
     cursor: pointer;
     font-size: 18px;
-    color: #6a6a6a; /* Culoare gri pentru a se potrivi cu etichetele */
-    user-select: none; /* Previne selectarea textului la click */
+    color: #6a6a6a;
+    /* Culoare gri pentru a se potrivi cu etichetele */
+    user-select: none;
+    /* Previne selectarea textului la click */
 }
 
 /* Stilul de focus pe wrapper-ul de parolă */

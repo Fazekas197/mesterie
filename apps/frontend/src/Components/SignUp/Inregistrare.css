@@ -1,5 +1,3 @@
-/* ... [cod anterior] ... */
-
 /* Stil pentru titlul "Înregistrare" */
 .title-text-large {
     font-size: 28px;
@@ -172,4 +170,25 @@
 .phone-input-wrapper.input-error {
     border-color: #e53e3e;
     /* Roșu intens pentru chenar */
+}
+
+/* 🔙 Buton săgeată "Înapoi" vizibil și funcțional */
+.back-arrow-top {
+    position: relative;
+    /* nu mai e absolute - se aliniază în container */
+    display: inline-block;
+    font-size: 28px;
+    color: #000;
+    /* Negru vizibil */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 10px;
+    /* spațiu față de titlu */
+    user-select: none;
+}
+
+.back-arrow-top:hover {
+    color: #007bff;
+    /* devine albastră la hover */
+    transform: scale(1.1);
 }
