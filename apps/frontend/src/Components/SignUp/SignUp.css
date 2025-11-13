@@ -43,7 +43,7 @@
 	height: auto;
 	border-radius: 16px;
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-	max-height: 100%;
+	max-height: 104%;
 
 	/* Formularul va avea conținutul aliniat la stânga în mare parte, nu centrat */
 	display: flex;
@@ -136,7 +136,7 @@
 
 .DejaCont {
 	margin-top: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	width: 100%;
 	/* ✨ SCHIMBARE: Centrare pentru textul "Aveți deja un cont?" */
 	text-align: center;

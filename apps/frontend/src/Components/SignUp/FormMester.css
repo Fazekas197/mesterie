@@ -1,0 +1,82 @@
+/* Folosim aceleași stiluri generale de layout din SignUp.css */
+
+/* Stiluri specifice formularului */
+
+.input-label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Stilul general al câmpurilor de intrare (input, select, textarea) */
+.input-field {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    /* Asigură că padding-ul nu mărește lățimea */
+}
+
+.input-field input,
+.input-field select {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+}
+
+.input-field textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+    resize: vertical;
+    /* Permite utilizatorului să redimensioneze doar pe verticală */
+}
+
+/* Butonul principal de înregistrare */
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Săgeata de înapoi (pentru consistență vizuală) */
+.back-arrow-top {
+    /* Folosim stilul inline din JSX, dar aici putem adăuga un hover state */
+    color: #333;
+}
+
+.back-arrow-top:hover {
+    color: #007bff;
+}
+
+/* Ajustare pentru a îmbunătăți aspectul câmpurilor goale/selectate */
+.input-field input::placeholder,
+.input-field textarea::placeholder {
+    color: #a0a0a0;
+    font-style: italic;
+}

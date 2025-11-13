@@ -5,6 +5,8 @@ import Inregistrare from "./Components/SignUp/Inregistrare";
 import PagParola from "./Components/SignUp/PagParola";
 import RoleSelection from "./Components/SignUp/RoleSelection";
 import Login from "./Components/SignUp/Login"
+// ✨ NOU: Import componenta FormMester
+import FormMester from "./Components/SignUp/FormMester";
 
 function App() {
 	const [paginaActiva, setPaginaActiva] = useState("signup");
@@ -27,6 +29,11 @@ function App() {
 			)}
 			{paginaActiva === "selectare-rol" && (
 				<RoleSelection onNavigare={navigeazaLa} />
+			)}
+
+			{/* ✨ NOU: Adăugarea rutei pentru Formularul Meșter */}
+			{paginaActiva === "formular-mester" && (
+				<FormMester onNavigare={navigeazaLa} />
 			)}
 		</div>
 	);

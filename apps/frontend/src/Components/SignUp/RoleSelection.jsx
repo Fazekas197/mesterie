@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './RoleSelection.css';
 import logo from '../Assets/LogoAlb.svg';
-import IconMester from '../Assets/IconMester.svg'; // Importul tău
-import IconClient from '../Assets/IconClient.svg'; // Importul tău
+import IconMester from '../Assets/IconMester.svg';
+import IconClient from '../Assets/IconClient.svg';
 
 const RoleSelection = ({ onNavigare }) => {
     // Stochează rolul selectat: 'client', 'mester', sau null
@@ -24,8 +24,9 @@ const RoleSelection = ({ onNavigare }) => {
             console.log('Navigare către finalizare CLIENT');
             // onNavigare('finalizare-client'); 
         } else if (selectedRole === 'mester') {
-            console.log('Navigare către finalizare MEȘTER');
-            // onNavigare('finalizare-mester'); 
+            console.log('Navigare către Formular MEȘTER');
+            // ✨ MODIFICARE: Navigare la noua pagină FormMester
+            onNavigare('formular-mester');
         }
     };
 
@@ -46,7 +47,7 @@ const RoleSelection = ({ onNavigare }) => {
                 {/* Săgeata de înapoi */}
                 <span
                     className="back-arrow-top"
-                    onClick={() => onNavigare('parola')} // Navighează înapoi la 'inregistrare'
+                    onClick={() => onNavigare('parola')}
                     title="Înapoi la Parola"
                 >
                     &larr;
@@ -62,7 +63,6 @@ const RoleSelection = ({ onNavigare }) => {
                         className={getRoleClass('client')}
                         onClick={() => setSelectedRole('client')}
                     >
-                        {/* ✨ NOU: Imaginea Client */}
                         <img src={IconClient} alt="Client Icon" className="role-icon-img" />
                         <span>Client</span>
                     </div>
@@ -72,7 +72,6 @@ const RoleSelection = ({ onNavigare }) => {
                         className={getRoleClass('mester')}
                         onClick={() => setSelectedRole('mester')}
                     >
-                        {/* ✨ NOU: Imaginea Meșter */}
                         <img src={IconMester} alt="Mester Icon" className="role-icon-img" />
                         <span>Meșter</span>
                     </div>
