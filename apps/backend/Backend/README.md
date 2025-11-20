@@ -9,6 +9,8 @@
 -   [Adaugare la Favorite](#adaugare-la-favorite)
 -   [Stergere de la Favorite](#stergere-de-la-favorite)
 -   [Vizualizare Favorite](#vizualizare-favorite)
+-   [Vizualizare Toti Meseriasii](#vizualizare-toti-meseriasii)
+-   [Vizualizare Detalii Meserias](#vizualizare-detalii-meserias)
 
 ---
 
@@ -232,4 +234,78 @@
 		"id_meserias": 8
 	}
 ]
+```
+
+## Vizualizare Toti Meseriasii
+
+-   **Endpoint:** `/meseriasi`
+-   **Metodă:** `GET`
+-   **Autentificare:** Nu
+-   **Descriere:** Returnează o listă completă cu toți meseriașii înregistrați, incluzând numele, detaliile de contact și județul (via DTO).
+
+---
+
+### 💻 Usage example
+
+#### Response
+
+-   **Status:** 200 OK
+
+```json
+[
+	{
+		"id": 1,
+		"nume": "Ion Popescu",
+		"telefon": "0744123456",
+		"desc": "Instalator sanitar cu experienta.",
+		"experienta": 5,
+		"pret_start": 100.0,
+		"disponibilitate": "Luni-Vineri",
+		"judetName": "Iasi"
+	},
+	{
+		"id": 2,
+		"nume": "Vasile Ionescu",
+		"telefon": "0755987654",
+		"desc": "Electrician autorizat.",
+		"experienta": 10,
+		"pret_start": 150.0,
+		"disponibilitate": "Weekend",
+		"judetName": "Cluj"
+	}
+]
+```
+
+---
+
+## Vizualizare Detalii Meserias
+
+-   **Endpoint:** `/meseriasi/{id}`
+-   **Metodă:** `GET`
+-   **Autentificare:** Nu
+-   **Descriere:** Returnează detaliile specifice ale unui singur meseriaș identificat prin ID.
+
+---
+
+### 💻 Usage example
+
+#### Request
+
+    GET /meseriasi/1
+
+#### Response
+
+-   **Status:** 200 OK
+
+```json
+{
+	"id": 1,
+	"nume": "Ion Popescu",
+	"telefon": "0744123456",
+	"desc": "Instalator sanitar cu experienta.",
+	"experienta": 5,
+	"pret_start": 100.0,
+	"disponibilitate": "Luni-Vineri",
+	"judetName": "Iasi"
+}
 ```
