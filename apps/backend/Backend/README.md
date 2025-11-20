@@ -6,6 +6,9 @@
 -   [Autentificare utilizator](#autentificare-utilizator)
 -   [Test token JWT](#test-token-jwt)
 -   [Obținere județe și specializări](#obținere-județe-și-specializări)
+-   [Adaugare la Favorite](#adaugare-la-favorite)
+-   [Stergere de la Favorite](#stergere-de-la-favorite)
+-   [Vizualizare Favorite](#vizualizare-favorite)
 
 ---
 
