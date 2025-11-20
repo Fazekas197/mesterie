@@ -152,3 +152,81 @@
 	]
 }
 ```
+
+---
+
+## Adaugare la Favorite
+
+-   **Endpoint:** `/favorite/{id_meserias}`
+-   **Metodă:** `POST`
+-   **Autentificare:** Da
+-   **Descriere:** Adaugă un meseriaș în lista de favorite a utilizatorului conectat.
+
+---
+
+### 💻 Usage example
+
+#### Request
+
+    POST /favorite/5
+
+#### Response
+
+-   **Status:** 201 Created
+
+```json
+{
+	"id": 1,
+	"id_user": 10,
+	"id_meserias": 5
+}
+```
+
+---
+
+## Stergere de la Favorite
+
+-   **Endpoint:** `/favorite/{id_meserias}`
+-   **Metodă:** `DELETE`
+-   **Autentificare:** Da
+-   **Descriere:** Șterge un meseriaș din lista de favorite a utilizatorului.
+
+---
+
+### 💻 Usage example
+
+#### Response
+
+-   **Status:** 204 No Content
+
+---
+
+## Vizualizare Favorite
+
+-   **Endpoint:** `/favorite`
+-   **Metodă:** `GET`
+-   **Autentificare:** Da
+-   **Descriere:** Returnează lista completă a meseriașilor favoriți pentru utilizatorul conectat.
+
+---
+
+### 💻 Usage example
+
+#### Response
+
+-   **Status:** 200 OK
+
+```json
+[
+	{
+		"id": 1,
+		"id_user": 10,
+		"id_meserias": 5
+	},
+	{
+		"id": 2,
+		"id_user": 10,
+		"id_meserias": 8
+	}
+]
+```
