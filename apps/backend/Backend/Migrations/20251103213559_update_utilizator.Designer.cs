@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251103213559_update_utilizator")]
+    partial class update_utilizator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,40 +24,6 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.Models.Aplicare", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateOnly>("Created_at")
-                        .HasColumnType("date");
-
-                    b.Property<int>("Id_Meserias")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_Oferta")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Mesaj")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_Meserias");
-
-                    b.HasIndex("Id_Oferta");
-
-                    b.ToTable("Aplicari");
-                });
 
             modelBuilder.Entity("Backend.Models.Favorit", b =>
                 {
@@ -99,10 +68,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Meserias", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Id_user")
                         .HasColumnType("integer");
@@ -121,9 +87,8 @@ namespace Backend.Migrations
                     b.Property<int>("Id_Judet")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("Pret_start")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)");
+                    b.Property<float>("Pret_start")
+                        .HasColumnType("real");
 
                     b.HasKey("Id", "Id_user");
 
@@ -174,39 +139,6 @@ namespace Backend.Migrations
                     b.HasIndex("Id_user");
 
                     b.ToTable("Oferte");
-                });
-
-            modelBuilder.Entity("Backend.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateOnly>("Created_at")
-                        .HasColumnType("date");
-
-                    b.Property<int>("Id_Meserias")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id_User")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Recenzie")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id_Meserias");
-
-                    b.HasIndex("Id_User");
-
-                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Backend.Models.Specializare", b =>
@@ -272,35 +204,11 @@ namespace Backend.Migrations
 
                     b.Property<string>("Telefon")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.ToTable("Utilizatori");
-                });
-
-            modelBuilder.Entity("Backend.Models.Aplicare", b =>
-                {
-                    b.HasOne("Backend.Models.Meserias", "Meserias")
-                        .WithMany()
-                        .HasForeignKey("Id_Meserias")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Oferta", "Oferta")
-                        .WithMany()
-                        .HasForeignKey("Id_Oferta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Meserias");
-
-                    b.Navigation("Oferta");
                 });
 
             modelBuilder.Entity("Backend.Models.Favorit", b =>
@@ -365,26 +273,6 @@ namespace Backend.Migrations
                     b.Navigation("Judet");
 
                     b.Navigation("Specializare");
-
-                    b.Navigation("Utilizator");
-                });
-
-            modelBuilder.Entity("Backend.Models.Review", b =>
-                {
-                    b.HasOne("Backend.Models.Meserias", "Meserias")
-                        .WithMany()
-                        .HasForeignKey("Id_Meserias")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Backend.Models.Utilizator", "Utilizator")
-                        .WithMany()
-                        .HasForeignKey("Id_User")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Meserias");
 
                     b.Navigation("Utilizator");
                 });

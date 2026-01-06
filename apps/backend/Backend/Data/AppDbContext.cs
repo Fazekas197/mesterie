@@ -1,3 +1,8 @@
+// Backend/Data/AppDbContext.cs
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+using System.Threading;
+using Backend.Exceptions;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +22,59 @@ public class AppDbContext : DbContext
     public DbSet<SpecializareMeserias> SpecializariMeseriasi { get; set; } = null!;
     public DbSet<Favorit> Favorite { get; set; } = null!;
     public DbSet<Oferta> Oferte { get; set; } = null!;
+    public DbSet<Review> Reviews { get; set; } = null!;
+    public DbSet<Aplicare> Aplicari { get; set; } = null!;
+
+    // Allowed characters: Unicode letters, spaces, hyphen and apostrophe.
+    // Adjust regex if you want ASCII-only (e.g. ^[A-Za-z\s'-]+$).
+    private static readonly Regex NameRegex = new(@"^[\p{L}\s'-]+$", RegexOptions.Compiled);
+
+    public override int SaveChanges()
+    {
+        ValidateEntities();
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        ValidateEntities();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void ValidateEntities()
+    {
+        foreach (var entry in ChangeTracker.Entries<Utilizator>()
+                     .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
+        {
+            var u = entry.Entity;
+
+            // --- Validate Nume ---
+            var nume = u.Nume?.Trim();
+            if (string.IsNullOrWhiteSpace(nume) || !NameRegex.IsMatch(nume))
+                throw new FieldValidationException("Nume",
+                    "Nume may contain only letters, spaces, hyphens and apostrophes.");
+
+            u.Nume = nume!;
+
+            // --- Validate Telefon ---
+            if (string.IsNullOrWhiteSpace(u.Telefon) || !Regex.IsMatch(u.Telefon, @"^\d{10}$"))
+                throw new FieldValidationException("Telefon", "Telefon must contain exactly 10 digits.");
+
+            // --- Validate Data_Nasterii ---
+            if (u.Data_Nasterii == null)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate is required.");
+
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            var minDate = new DateOnly(1925, 1, 1);
+
+            if (u.Data_Nasterii < minDate)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate cannot be earlier than 1925.");
+
+            if (u.Data_Nasterii > today)
+                throw new FieldValidationException("Data_Nasterii", "Birthdate cannot be in the future.");
+        }
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -28,7 +86,17 @@ public class AppDbContext : DbContext
         // Make Id an alternate (unique) principal key so single-col FKs can target it
         modelBuilder.Entity<Meserias>()
             .HasAlternateKey(m => m.Id);
+        // Inside AppDbContext.OnModelCreating()
+        modelBuilder.Entity<Meserias>()
+            .HasKey(m => new { m.Id, m.Id_user });
 
+        modelBuilder.Entity<Meserias>()
+            .HasAlternateKey(m => m.Id);
+
+        // ✅ Limit decimals on Pret_start
+        modelBuilder.Entity<Meserias>()
+            .Property(m => m.Pret_start)
+            .HasPrecision(10, 2);
         // Ensure SpecializareMeserias composite PK
         modelBuilder.Entity<SpecializareMeserias>()
             .HasKey(s => new { s.Id_meserias, s.Id_specializare });
@@ -65,5 +133,39 @@ public class AppDbContext : DbContext
             .HasPrincipalKey(m => m.Id) // FK points to alternate key
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<Review>()
+            .HasKey(r => r.Id);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Utilizator)
+            .WithMany() // optionally: .WithMany(u => u.Reviews)
+            .HasForeignKey(r => r.Id_User)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Reviews)
+            .HasForeignKey(r => r.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references Meserias.Id (alternate key)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // -------------------------------
+        // Aplicare
+        // -------------------------------
+        modelBuilder.Entity<Aplicare>()
+            .HasKey(a => a.Id);
+
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Oferta)
+            .WithMany() // optionally: .WithMany(o => o.Aplicari)
+            .HasForeignKey(a => a.Id_Oferta)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Aplicare>()
+            .HasOne(a => a.Meserias)
+            .WithMany() // optionally: .WithMany(m => m.Aplicari)
+            .HasForeignKey(a => a.Id_Meserias)
+            .HasPrincipalKey(m => m.Id) // references alternate key in Meserias
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
