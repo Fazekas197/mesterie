@@ -11,7 +11,7 @@ const usersDatabase = [
   { email: 'test@test.com', parola: '123456' }
 ];
 
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
   const [email, setEmail] = useState('');
   const [parola, setParola] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -31,14 +31,13 @@ const Login = () => {
       // SUCCES: Utilizator găsit
       console.log('Utilizator autentificat cu succes:', userGasit);
       setError(false);
-      // Aici ai naviga utilizatorul către pagina principală (de ex. /dashboard)
+      onLoginSuccess(); // Apelăm funcția pentru a semnala autentificarea cu succes
     } else {
       // EROARE: Utilizator negăsit sau parolă greșită
       console.log('Eroare: Datele introduse nu sunt corecte');
       setError(true);
     }
   };
-
 
   return (
     <div className="login-page-container">

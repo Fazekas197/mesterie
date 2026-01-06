@@ -1,0 +1,628 @@
+/* === RESET & BASE STYLES === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    /* Fallback color */
+}
+
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* === HEADER === */
+.header-fixed-white {
+    background-color: #ffffff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* O umbra foarte subtila pentru separare */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.header-logo-img {
+    height: 70px;
+    width: auto;
+}
+
+.header-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+/* === ZONA ALBASTRA DE FUNDAL === */
+.blue-content-area {
+    background-color: #004fa3;
+    /* Albastrul intens din design */
+    flex: 1;
+    /* Ocupa restul spatiului */
+    padding: 24px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* === FOAIA ALBA PRINCIPALA (Containerul rotunjit) === */
+.main-white-sheet {
+    background-color: #eff1f3;
+    /* Gri-ul foarte deschis al containerului */
+    width: 100%;
+    max-width: 550px;
+    /* Latime maxima pentru desktop */
+    border-radius: 24px;
+    /* Rotunjire mare la colturi */
+    padding: 24px 20px;
+    /* O umbra usoara sa il ridice de pe albastru */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === BUTOANELE DE ACTIUNE DE SUS === */
+.top-action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.btn-blue-outline {
+    border: 1.5px solid #2d7fe8;
+    color: #2d7fe8;
+}
+
+.btn-orange-outline {
+    border: 1.5px solid #ff7a45;
+    color: #ff7a45;
+}
+
+/* === TITLU SECTIUNE === */
+.sheet-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+/* === LISTA CARDURI === */
+.cards-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    /* Spatiu generos intre elementele listei */
+}
+
+.mester-full-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* === 1. CUTIA INTERNA CU CHENAR (Partea principala) === */
+.inner-bordered-card {
+    background-color: #eff1f3;
+    /* Acelasi fundal ca foaia mama */
+    border: 1px solid #d1d5db;
+    /* Chenarul gri deschis */
+    border-radius: 22px;
+    /* Rotunjire mare */
+    padding: 18px 18px 14px 18px;
+}
+
+/* --- Header Card --- */
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.header-info-left {
+    flex: 1;
+    padding-right: 12px;
+}
+
+.info-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 6px;
+}
+
+.info-specs {
+    font-size: 0.8rem;
+    color: #1a73e8;
+    /* Albastru tipic pentru linkuri/taguri */
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.header-loc-right {
+    text-align: right;
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.loc-label {
+    font-size: 0.7rem;
+    color: #9aa0a6;
+    /* Gri deschis pentru etichete */
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.loc-city-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.loc-city-word {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.15;
+}
+
+/* --- Descriere --- */
+.card-description {
+    font-size: 0.8rem;
+    color: #80868b;
+    /* Gri mediu pentru text */
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+/* --- Footer Card (Pret & Link) --- */
+.card-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.price-label {
+    font-size: 0.8rem;
+    color: #9aa0a6;
+}
+
+.price-value {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #ff6600;
+    /* Portocaliu intens pentru pret */
+}
+
+.view-profile-link {
+    background: none;
+    border: none;
+    color: #1a73e8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+}
+
+/* === 2. ZONA EXTERIOARA (Favorite) === */
+.outer-favorite-row {
+    margin-top: 10px;
+    padding-left: 12px;
+    /* Aliniere vizuala sub textul de sus */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fav-label {
+    font-size: 0.8rem;
+    color: #5f6368;
+    /* Gri putin mai inchis decat etichetele */
+    font-weight: 600;
+}
+
+.fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+}
+
+/* Hover state optional pentru stea */
+.fav-btn:hover .fav-star-icon {
+    color: #5f6368;
+}
+
+/* ========================================= */
+/* === STILURI PENTRU MENIUL ASCUNS (NAVBAR) === */
+/* ========================================= */
+
+.nav-overlay {
+    position: fixed;
+    /* Fixat pe ecran, să acopere tot */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Înălțimea totală a ecranului */
+    background-color: #f5f5f5;
+    /* Gri-ul deschis din design */
+    z-index: 2000;
+    /* Trebuie să fie PESTE header-ul existent (care are z-index 100) */
+    padding: 20px;
+
+    /* Logica de animație */
+    transform: translateX(100%);
+    /* Inițial este ascuns complet în dreapta */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Tranziție fluidă */
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Când meniul este activ (clasa adăugată de React) */
+.nav-overlay.active {
+    transform: translateX(0);
+    /* Vine pe ecran la poziția 0 */
+}
+
+/* --- Header Meniu (Săgeată + Logo) --- */
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-bottom: 80px;
+    /* Spațiu mare până la linkuri */
+}
+
+.nav-back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    /* Resetăm padding-ul butonului */
+}
+
+.nav-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Îl micșorăm puțin și setăm originea transformării */
+    transform: scale(0.85);
+    transform-origin: top right;
+    margin-top: -5px;
+    /* Ajustare fină să se alinieze cu săgeata */
+}
+
+.nav-logo-text {
+    font-weight: 900;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.nav-logo-slogan {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: black;
+    color: white;
+    padding: 3px 6px;
+    margin-top: 4px;
+    border-radius: 2px;
+}
+
+/* --- Link-uri Meniu --- */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* Spațiere generoasă între linkuri */
+    padding-right: 10px;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: flex-end;
+    /* Totul aliniat la DREAPTA */
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.nav-text {
+    font-size: 28px;
+    /* Text mare */
+    font-weight: 700;
+    color: #cbd5e1;
+    /* Gri deschis pentru linkuri inactive */
+    transition: color 0.3s;
+}
+
+.nav-text:hover {
+    color: #94a3b8;
+}
+
+/* --- Stil specific pentru elementul ACTIV (Acasă) --- */
+.nav-item.active {
+    justify-content: space-between;
+    /* Linie în stânga, text în dreapta */
+}
+
+.active-text {
+    color: #ff6600;
+    /* Portocaliul brandului */
+}
+
+.orange-line {
+    width: 50px;
+    height: 4px;
+    background-color: #ff6600;
+    border-radius: 2px;
+}
+
+/* Spațiere extra pentru butonul de deconectare */
+.logout-item {
+    margin-top: 50px;
+}
+
+/* ========================================= */
+
+.logout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundal negru semi-transparent */
+    z-index: 10000;
+    /* Peste absolut tot, inclusiv meniul lateral */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logout-modal {
+    background-color: white;
+    width: 100%;
+    max-width: 320px;
+    padding: 30px 20px 20px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.logout-message {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.logout-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+/* Butonul Anulează */
+.btn-cancel {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Butonul Deconectare (Roșu) */
+.btn-confirm-logout {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #ff3b30;
+    /* Roșu similar iOS */
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* ========================================================= */
+/* === STILURI PENTRU DESKTOP (Laptop / PC) === */
+/* ========================================================= */
+
+/* 1. Inițial, ascundem meniul de desktop (pentru că suntem "Mobile First") */
+.desktop-nav {
+    display: none;
+}
+
+/* 2. MEDIA QUERY: Se aplică DOAR dacă ecranul e mai mare de 1024px (Laptop) */
+@media screen and (min-width: 1024px) {
+
+    /* --- HEADER --- */
+    .header-fixed-white {
+        padding: 15px 40px;
+        /* Mai mult spațiu lateral */
+    }
+
+    .header-menu-btn {
+        display: none;
+        /* ASCUNDEM BUTONUL BURGER PE PC */
+    }
+
+    /* Afișăm meniul desktop */
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        /* Distanță între linkuri */
+    }
+
+    .desk-link {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .desk-link:hover {
+        color: #ff6600;
+    }
+
+    .desk-link.active {
+        color: #000;
+        font-weight: 700;
+    }
+
+    /* Butonul Deconectare (cu chenar) */
+    .desk-logout-btn {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .desk-logout-btn:hover {
+        background-color: #e0e0e0;
+        border-color: #999;
+    }
+
+    /* --- CONȚINUT PRINCIPAL --- */
+    /* Facem foaia albă mare și lată, ca în poză */
+    .main-white-sheet {
+        max-width: 1200px;
+        /* Lățime mare */
+        min-width: 85vh;
+        height: auto;
+        /* Aproape cât tot ecranul pe înălțime */
+        margin-top: 20px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+
+    /* Mutăm butoanele de Filtrare/Creare în DREAPTA SUS */
+    .top-action-buttons {
+        justify-content: flex-end;
+        /* Le împingem în dreapta */
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .action-btn {
+        flex: initial;
+        /* Nu se mai întind cât pot */
+        width: 180px;
+        /* Mărime fixă, elegantă */
+    }
+
+    /* Facem lista de carduri să arate bine pe spațiu mare */
+
+    .cards-list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* Opțional: Facem cardurile să arate mai mult a "listă" pe desktop */
+    .inner-bordered-card {
+        padding: 25px;
+        /* Mai mult spațiu în interior */
+    }
+}
+
+/* 1. STIL MOBIL (Rămâne exact cum era) */
+.header-flex-row {
+    display: block;
+    width: 100%;
+}
+
+.top-action-buttons {
+    margin-bottom: 20px;
+    /* Spațiu între butoane și titlu pe mobil */
+}
+
+.sheet-title {
+    font-size: 1.15rem;
+    /* Mărime normală pe mobil */
+}
+
+/* 2. STIL DESKTOP (Se aplică DOAR pe ecran mare) */
+@media screen and (min-width: 1024px) {
+
+    .header-flex-row {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+
+    }
+
+    .top-action-buttons {
+        width: auto;
+        margin-bottom: 0;
+
+    }
+
+    .sheet-title {
+        font-size: 28px;
+        margin-bottom: 0;
+    }
+}
