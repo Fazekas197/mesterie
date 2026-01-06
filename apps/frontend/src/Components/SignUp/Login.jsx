@@ -23,10 +23,10 @@ const Login = ({ onNavigare }) => {
     event.preventDefault();
     console.log("Încercare de autentificare cu:", email, parola);
 
-    //Căutăm utilizatorul în "baza de date"
-    const userGasit = usersDatabase.find(
-      (user) => user.email === email && user.parola === parola
-    );
+		//Căutăm utilizatorul în "baza de date"
+		const userGasit = usersDatabase.find(
+			(user) => user.email === email && user.parola === parola
+		);
 
     //Verificăm dacă a fost găsit
     if (userGasit) {
