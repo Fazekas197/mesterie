@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import Login from './Components/Login.jsx';
 import RoleSelection from './SelectareUser/RoleSelection.jsx';
