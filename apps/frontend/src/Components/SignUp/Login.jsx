@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import eyeOff from "../Assets/eye-off.svg";
 import eyeOn from "../Assets/eye-on.svg";
-
 import logo from "../Assets/LogoAlb.svg"; // Corectează calea la 'Assets' cu A mare
 import "./Login.css";
 // MODIFICARE NOUĂ: BAZĂ DE DATE FALSĂ (MOCK)

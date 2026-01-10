@@ -16,7 +16,6 @@ const FormMester = ({ onNavigare }) => {
     };
 
     return (
-        // Folosește .page-wrapper din SignUp.css pentru layout-ul principal
         <div className="page-wrapper">
             <div className="logo">
                 <img src={LogoAlb} alt="Mesterie Logo" />

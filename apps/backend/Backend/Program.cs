@@ -35,8 +35,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.SetIsOriginAllowed(origin => true) // Permite orice origin (mai sigur pt dev)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); // Adaugă asta dacă vei folosi cookies/auth tokens în viitor
+        });
+});
 
 var app = builder.Build();
+
+app.UseCors("AllowReactApp");
 
 app.UseAuthentication();
 app.UseAuthorization();
